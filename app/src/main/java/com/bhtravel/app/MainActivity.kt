@@ -35,5 +35,30 @@ class MainActivity : AppCompatActivity() {
         btnBudget.setOnClickListener {
             startActivity(Intent(this, BudgetActivity::class.java))
         }
+
+        // Explore quick action
+        val btnExplore = findViewById<TextView>(R.id.btnExplore)
+        btnExplore.setOnClickListener {
+            startActivity(Intent(this, ExploreActivity::class.java))
+        }
+
+        // Explore bottom navigation
+        val navExplore = findViewById<TextView>(R.id.navExplore)
+        navExplore.setOnClickListener {
+            startActivity(Intent(this, ExploreActivity::class.java))
+        }
+
+        // Budget bottom navigation
+        val navBudget = findViewById<TextView>(R.id.navBudget)
+        navBudget.setOnClickListener {
+            startActivity(Intent(this, BudgetActivity::class.java))
+        }
+
+        // Profile bottom navigation
+        val navProfile = findViewById<TextView>(R.id.navProfile)
+        navProfile.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
     }
 }
