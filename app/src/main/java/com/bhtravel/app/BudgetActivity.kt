@@ -3,7 +3,6 @@ package com.bhtravel.app
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -49,7 +48,8 @@ class BudgetActivity : AppCompatActivity() {
     private var selectedTrip: TripEntity? = null
     private var expensesLiveData: LiveData<List<ExpenseEntity>>? = null
 
-    private val dateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
+    private val dateFormat =
+        SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -167,8 +167,12 @@ class BudgetActivity : AppCompatActivity() {
         liveData.observe(this) { expenses ->
             displayExpenses(expenses)
 
-            val total = expenses.sumOf { it.amount }
-            tvTotalExpenses.text = "€${"%.2f".format(Locale.US, total)}"
+            val total = BudgetValidator.calculateTotal(
+                expenses.map { it.amount }
+            )
+
+            tvTotalExpenses.text =
+                "€${"%.2f".format(Locale.US, total)}"
         }
     }
 
@@ -204,22 +208,37 @@ class BudgetActivity : AppCompatActivity() {
         val description = etDescription.text.toString().trim()
         val date = etDate.text.toString().trim()
 
-        val amount = amountText.toDoubleOrNull()
+        val validationError = BudgetValidator.validate(
+            category = category,
+            amountText = amountText,
+            date = date
+        )
 
-        if (category.isEmpty()) {
-            etCategory.error = "Enter a category"
-            return
+        when (validationError) {
+            BudgetValidationError.CATEGORY_REQUIRED -> {
+                etCategory.error = "Enter a category"
+                etCategory.requestFocus()
+                return
+            }
+
+            BudgetValidationError.INVALID_AMOUNT -> {
+                etAmount.error = "Enter a valid amount"
+                etAmount.requestFocus()
+                return
+            }
+
+            BudgetValidationError.DATE_REQUIRED -> {
+                etDate.error = "Select a date"
+                etDate.requestFocus()
+                return
+            }
+
+            null -> {
+                // All fields are valid.
+            }
         }
 
-        if (amount == null || amount <= 0) {
-            etAmount.error = "Enter a valid amount"
-            return
-        }
-
-        if (date.isEmpty()) {
-            etDate.error = "Select a date"
-            return
-        }
+        val amount = amountText.toDoubleOrNull()!!
 
         val expense = ExpenseEntity(
             tripId = trip.id,

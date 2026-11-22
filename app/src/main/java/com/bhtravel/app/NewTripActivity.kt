@@ -140,6 +140,7 @@ class NewTripActivity : AppCompatActivity() {
 
                 if (isStartDate) {
                     startDate = chosenDate
+
                     btnStartDate.text =
                         dateFormat.format(chosenDate.time)
 
@@ -163,6 +164,7 @@ class NewTripActivity : AppCompatActivity() {
                         ).show()
                     } else {
                         endDate = chosenDate
+
                         btnEndDate.text =
                             dateFormat.format(chosenDate.time)
                     }
@@ -187,52 +189,66 @@ class NewTripActivity : AppCompatActivity() {
         val travelersText = etTravelers.text.toString().trim()
         val notes = etNotes.text.toString().trim()
 
-        if (destination.isEmpty()) {
-            etDestination.error = "Please enter a destination"
-            etDestination.requestFocus()
-            return
+        val validationError = TripValidator.validate(
+            destination = destination,
+            country = country,
+            startDateMillis = startDate?.timeInMillis,
+            endDateMillis = endDate?.timeInMillis,
+            travelersText = travelersText
+        )
+
+        when (validationError) {
+            TripValidationError.DESTINATION_REQUIRED -> {
+                etDestination.error = "Please enter a destination"
+                etDestination.requestFocus()
+                return
+            }
+
+            TripValidationError.COUNTRY_REQUIRED -> {
+                etCountry.error = "Please enter a country"
+                etCountry.requestFocus()
+                return
+            }
+
+            TripValidationError.START_DATE_REQUIRED -> {
+                Toast.makeText(
+                    this,
+                    "Please choose a start date.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return
+            }
+
+            TripValidationError.END_DATE_REQUIRED -> {
+                Toast.makeText(
+                    this,
+                    "Please choose an end date.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return
+            }
+
+            TripValidationError.INVALID_DATE_RANGE -> {
+                Toast.makeText(
+                    this,
+                    "End date cannot be before start date.",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return
+            }
+
+            TripValidationError.INVALID_TRAVELERS -> {
+                etTravelers.error = "Enter at least 1 traveler"
+                etTravelers.requestFocus()
+                return
+            }
+
+            null -> {
+                // All fields are valid.
+            }
         }
 
-        if (country.isEmpty()) {
-            etCountry.error = "Please enter a country"
-            etCountry.requestFocus()
-            return
-        }
-
-        if (startDate == null) {
-            Toast.makeText(
-                this,
-                "Please choose a start date.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-
-        if (endDate == null) {
-            Toast.makeText(
-                this,
-                "Please choose an end date.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-
-        if (endDate!!.before(startDate!!)) {
-            Toast.makeText(
-                this,
-                "End date cannot be before start date.",
-                Toast.LENGTH_SHORT
-            ).show()
-            return
-        }
-
-        val travelers = travelersText.toIntOrNull()
-
-        if (travelers == null || travelers < 1) {
-            etTravelers.error = "Enter at least 1 traveler"
-            etTravelers.requestFocus()
-            return
-        }
+        val travelers = travelersText.toIntOrNull()!!
 
         val trip = TripEntity(
             id = editingTripId,
