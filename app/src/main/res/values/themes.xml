@@ -1,9 +1,30 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+<resources>
+
     <style name="Base.Theme.BHtravel" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <!-- Primary colors -->
+        <item name="colorPrimary">@color/light_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <!-- Secondary colors -->
+        <item name="colorSecondary">@color/light_accent</item>
+        <item name="colorOnSecondary">@color/navy</item>
+
+        <!-- Background and surfaces -->
+        <item name="colorSurface">@color/light_surface</item>
+        <item name="colorOnSurface">@color/light_text</item>
+        <item name="android:windowBackground">@color/light_background</item>
+
+        <!-- System bars -->
+        <item name="android:statusBarColor">@color/light_background</item>
+        <item name="android:navigationBarColor">@color/light_background</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Accent -->
+        <item name="android:colorAccent">@color/turquoise</item>
+
     </style>
 
     <style name="Theme.BHtravel" parent="Base.Theme.BHtravel" />
+
 </resources>

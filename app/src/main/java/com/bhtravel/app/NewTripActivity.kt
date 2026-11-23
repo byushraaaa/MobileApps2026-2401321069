@@ -20,6 +20,8 @@ class NewTripActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_TRIP_ID = "trip_id"
+        const val EXTRA_DESTINATION = "extra_destination"
+        const val EXTRA_COUNTRY = "extra_country"
     }
 
     private lateinit var etDestination: EditText
@@ -36,6 +38,9 @@ class NewTripActivity : AppCompatActivity() {
     private var startDate: Calendar? = null
     private var endDate: Calendar? = null
     private var editingTripId: Int = 0
+
+    private var originalImageName: String? = null
+    private var originalDestination: String? = null
 
     private val dateFormat =
         SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
@@ -63,6 +68,13 @@ class NewTripActivity : AppCompatActivity() {
         if (editingTripId != 0) {
             btnSaveTrip.text = "Update Trip"
             loadTrip(editingTripId)
+        } else {
+            etDestination.setText(
+                intent.getStringExtra(EXTRA_DESTINATION) ?: ""
+            )
+            etCountry.setText(
+                intent.getStringExtra(EXTRA_COUNTRY) ?: ""
+            )
         }
 
         btnStartDate.setOnClickListener {
@@ -101,6 +113,9 @@ class NewTripActivity : AppCompatActivity() {
                 etCountry.setText(trip.country)
                 etTravelers.setText(trip.travelers.toString())
                 etNotes.setText(trip.notes)
+
+                originalDestination = trip.destination
+                originalImageName = trip.imageUrl
 
                 startDate = Calendar.getInstance().apply {
                     time = dateFormat.parse(trip.startDate)!!
@@ -183,6 +198,43 @@ class NewTripActivity : AppCompatActivity() {
         datePicker.show()
     }
 
+    private fun getDestinationImage(destination: String): String? {
+        return when (destination.trim().lowercase(Locale.ROOT)) {
+
+            "plovdiv", "пловдив" -> "plovdiv"
+
+            "dubai", "дубай" -> "dubai"
+
+            "tokyo", "токио" -> "tokyo"
+
+            "london", "лондон" -> "london"
+
+            "milan", "milano", "милано" -> "milano"
+
+            "vienna", "виена" -> "vienna"
+
+            "amsterdam", "амстердам" -> "amsterdam"
+
+            "paris", "париж" -> "paris"
+
+            "rome", "roma", "рим" -> "rome"
+
+            "budapest", "будапеща" -> "budapest"
+
+            "santorini", "санторини" -> "santorini"
+
+            "barcelona", "барселона" -> "barcelona"
+
+            "cappadocia", "кападокия" -> "cappadocia"
+
+            "sofia", "софия" -> "sofia"
+
+            "nessbar", "nessebar", "несебър" -> "nessbar"
+
+            else -> null
+        }
+    }
+
     private fun validateTrip() {
         val destination = etDestination.text.toString().trim()
         val country = etCountry.text.toString().trim()
@@ -250,6 +302,15 @@ class NewTripActivity : AppCompatActivity() {
 
         val travelers = travelersText.toIntOrNull()!!
 
+        val selectedImage = if (
+            editingTripId != 0 &&
+            destination.equals(originalDestination, ignoreCase = true)
+        ) {
+            originalImageName
+        } else {
+            getDestinationImage(destination)
+        }
+
         val trip = TripEntity(
             id = editingTripId,
             destination = destination,
@@ -257,7 +318,8 @@ class NewTripActivity : AppCompatActivity() {
             startDate = dateFormat.format(startDate!!.time),
             endDate = dateFormat.format(endDate!!.time),
             travelers = travelers,
-            notes = notes
+            notes = notes,
+            imageUrl = selectedImage
         )
 
         saveTrip(trip)
@@ -274,6 +336,7 @@ class NewTripActivity : AppCompatActivity() {
                         "Trip saved successfully!",
                         Toast.LENGTH_LONG
                     ).show()
+
                 } else {
                     repository.updateTrip(trip)
 

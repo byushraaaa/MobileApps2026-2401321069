@@ -1,5 +1,6 @@
 
 package com.bhtravel.app.data.entity
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -19,5 +20,7 @@ data class TripEntity(
 
     val travelers: Int,
 
-    val notes: String
+    val notes: String,
+
+    val imageUrl: String? = null
 )

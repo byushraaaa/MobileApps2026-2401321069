@@ -18,8 +18,11 @@ object DatabaseProvider {
             )
                 .addMigrations(
                     TripDatabase.MIGRATION_1_2,
-                    TripDatabase.MIGRATION_2_3
-                )                .build()
+                    TripDatabase.MIGRATION_2_3,
+                    TripDatabase.MIGRATION_3_4,
+                    TripDatabase.MIGRATION_4_5
+                )
+                .build()
 
             INSTANCE = instance
             instance

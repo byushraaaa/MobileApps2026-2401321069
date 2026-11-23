@@ -3,208 +3,619 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F8F7"
+    android:background="?attr/colorSurface"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="22dp">
+        android:padding="18dp">
 
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/btnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="‹  Back"
+                    android:textColor="?attr/colorSecondary"
+                    android:textSize="15sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:text="Explore the world"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="27sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Find your next unforgettable destination."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSearchExplore"
+                style="@style/Widget.Material3.Button.IconButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:contentDescription="Search destinations"
+                app:icon="@drawable/ic_search"
+                app:iconTint="#142B49"
+                app:iconSize="24dp"
+                app:backgroundTint="?attr/colorSecondaryContainer" />
+
+        </LinearLayout>
+
+        <!-- TRAVEL INSPIRATION -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="155dp"
+            android:layout_marginTop="24dp"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/travel"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Travel inspiration" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="#66142B49"
+                    android:gravity="bottom"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TRAVEL INSPIRATION"
+                        android:textColor="#FFFFFF"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Find places worth exploring"
+                        android:textColor="#FFFFFF"
+                        android:textSize="21sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Your next adventure starts here."
+                        android:textColor="#FFFFFF"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- TRAVEL IDEAS -->
         <TextView
-            android:id="@+id/btnBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="←  Back"
-            android:textColor="#168B8B"
-            android:textSize="16sp"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="25dp"
-            android:text="Explore the world"
-            android:textColor="#142B49"
-            android:textSize="28sp"
+            android:layout_marginTop="24dp"
+            android:text="Travel ideas"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="21sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="7dp"
-            android:text="Find your next unforgettable destination."
-            android:textColor="#526D78"
-            android:textSize="14sp" />
+            android:layout_marginTop="4dp"
+            android:text="Choose the kind of trip you love."
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="13sp" />
 
+        <!-- FIRST CATEGORY ROW -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <!-- BEACH -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardBeach"
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:rippleColor="#42678F"
+                app:cardBackgroundColor="#DCE8F5"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🏖️"
+                        android:textSize="28sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Beach"
+                        android:textColor="#142B49"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CITY -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCity"
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:rippleColor="#42678F"
+                app:cardBackgroundColor="#DCE8F5"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🏙️"
+                        android:textSize="28sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="City"
+                        android:textColor="#142B49"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- SECOND CATEGORY ROW -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <!-- CULTURE -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardCulture"
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:rippleColor="#42678F"
+                app:cardBackgroundColor="#DCE8F5"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🏛️"
+                        android:textSize="28sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Culture"
+                        android:textColor="#142B49"
+                        android:textStyle="bold"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- NATURE -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardNature"
+                android:layout_width="0dp"
+                android:layout_height="112dp"
+                android:layout_weight="1"
+                android:layout_marginStart="6dp"
+                android:clickable="true"
+                android:focusable="true"
+                app:rippleColor="#42678F"
+                app:cardBackgroundColor="#DCE8F5"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="🏔️"
+                        android:textSize="28sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="Nature &amp; Mountains"
+                        android:textColor="#142B49"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+        </LinearLayout>
+
+        <!-- POPULAR DESTINATIONS -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="Popular destinations"
-            android:textColor="#142B49"
-            android:textSize="20sp"
+            android:textColor="?attr/colorOnSurface"
+            android:textSize="21sp"
             android:textStyle="bold" />
 
-        <!-- Santorini -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Explore places loved by travellers."
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textSize="13sp" />
+
+        <!-- SANTORINI -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardSantorini"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
             app:cardCornerRadius="18dp"
-            app:cardElevation="3dp"
-            app:strokeWidth="0dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="14dp">
 
-                <TextView
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="125dp"
-                    android:background="#D9EEEF"
-                    android:gravity="center"
-                    android:text="🇬🇷  🏝️"
-                    android:textSize="55sp" />
+                    android:layout_height="145dp"
+                    android:src="@drawable/santorini"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Santorini Greece" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="12dp"
                     android:text="Santorini, Greece"
-                    android:textColor="#142B49"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Discover beautiful white houses, blue domes and unforgettable sunsets."
-                    android:textColor="#526D78"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="5dp"
+                    android:text="White houses, blue domes and unforgettable sunsets."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="13sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnSantoriniMap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:text="Explore on Map"
                     android:textAllCaps="false"
-                    app:cornerRadius="12dp"
-                    app:backgroundTint="#168B8B" />
-
+                    app:backgroundTint="?attr/colorSecondary"
+                    app:cornerRadius="12dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Rome -->
+        <!-- ROME -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardRome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
             app:cardCornerRadius="18dp"
-            app:cardElevation="3dp"
-            app:strokeWidth="0dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="14dp">
 
-                <TextView
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="125dp"
-                    android:background="#F5E8D8"
-                    android:gravity="center"
-                    android:text="🇮🇹  🏛️"
-                    android:textSize="55sp" />
+                    android:layout_height="145dp"
+                    android:src="@drawable/rome"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Rome Italy" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="12dp"
                     android:text="Rome, Italy"
-                    android:textColor="#142B49"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Experience ancient history, impressive architecture and Italian culture."
-                    android:textColor="#526D78"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="5dp"
+                    android:text="Ancient history, impressive architecture and Italian culture."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="13sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnRomeMap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:text="Explore on Map"
                     android:textAllCaps="false"
-                    app:cornerRadius="12dp"
-                    app:backgroundTint="#168B8B" />
-
+                    app:backgroundTint="?attr/colorSecondary"
+                    app:cornerRadius="12dp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Budapest -->
+        <!-- BUDAPEST -->
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBudapest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
             app:cardCornerRadius="18dp"
-            app:cardElevation="3dp"
-            app:strokeWidth="0dp">
+            app:cardElevation="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="18dp">
+                android:padding="14dp">
 
-                <TextView
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="125dp"
-                    android:background="#E5EAF5"
-                    android:gravity="center"
-                    android:text="🇭🇺  🌉"
-                    android:textSize="55sp" />
+                    android:layout_height="145dp"
+                    android:src="@drawable/budapest"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Budapest Hungary" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="12dp"
                     android:text="Budapest, Hungary"
-                    android:textColor="#142B49"
+                    android:textColor="?attr/colorOnSurface"
                     android:textSize="19sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Enjoy the Danube River, beautiful bridges and relaxing thermal baths."
-                    android:textColor="#526D78"
-                    android:textSize="14sp" />
+                    android:layout_marginTop="5dp"
+                    android:text="The Danube River, beautiful bridges and thermal baths."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="13sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btnBudapestMap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
+                    android:layout_marginTop="10dp"
                     android:text="Explore on Map"
                     android:textAllCaps="false"
-                    app:cornerRadius="12dp"
-                    app:backgroundTint="#168B8B" />
+                    app:backgroundTint="?attr/colorSecondary"
+                    app:cornerRadius="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
 
+        <!-- BARCELONA -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardBarcelona"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="145dp"
+                    android:src="@drawable/barcelona"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Barcelona Spain" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Barcelona, Spain"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Beautiful beaches, Gaudi architecture and Mediterranean charm."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="13sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnBarcelonaMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Explore on Map"
+                    android:textAllCaps="false"
+                    app:backgroundTint="?attr/colorSecondary"
+                    app:cornerRadius="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- EGYPT -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardEgypt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="18dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="145dp"
+                    android:src="@drawable/egypt"
+                    android:scaleType="centerCrop"
+                    android:contentDescription="Giza Pyramids Egypt" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Giza Pyramids, Egypt"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:text="Discover the ancient pyramids and the Great Sphinx of Giza."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="13sp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEgyptMap"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Explore on Map"
+                    android:textAllCaps="false"
+                    app:backgroundTint="?attr/colorSecondary"
+                    app:cornerRadius="12dp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- TRAVEL GUIDE -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            app:cardBackgroundColor="?attr/colorSurfaceVariant"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Travel guide"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:text="Get inspired, discover new places and plan your next adventure with BHtravel."
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    android:textSize="14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

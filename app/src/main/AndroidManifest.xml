@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".BHtravelApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -29,11 +30,8 @@
             android:name=".TripsActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".BudgetActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
+
+           <activity
             android:name=".ItineraryActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
@@ -45,6 +43,30 @@
             android:name=".ProfileActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".OffersActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".OfferDetailsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+        <activity
+            android:name=".FavoriteTripsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
+
+        <activity
+            android:name=".CategoryDestinationsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".WalletActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

@@ -2,61 +2,115 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F8FA"
+    android:background="#F7F9FC"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingBottom="28dp">
 
-        <TextView
-            android:id="@+id/btnBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="←  Back"
-            android:textColor="#17324D"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
+        <!-- Navy Blue Header -->
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="My Trips"
-            android:textColor="#17324D"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:layout_height="205dp"
+            android:background="#DCE8F5"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="All your adventures in one place."
-            android:textColor="#718096"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/btnBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginTop="20dp"
+                android:padding="6dp"
+                android:text="←"
+                android:textColor="#142B49"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/btnBack"
+                android:layout_marginTop="10dp"
+                android:text="My Trips"
+                android:textColor="#142B49"
+                android:textSize="34sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="25dp"
+                android:text="All your adventures in one place."
+                android:textColor="#42678F"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="55dp"
+                android:text="☁"
+                android:textColor="#FFFFFF"
+                android:textSize="38sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="55dp"
+                android:text="✈"
+                android:textColor="#142B49"
+                android:textSize="48sp" />
+
+        </RelativeLayout>
+
+        <!-- Trip Sections -->
         <LinearLayout
-            android:id="@+id/tripsContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:orientation="vertical" />
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp">
 
-        <TextView
-            android:id="@+id/tvEmptyState"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
-            android:gravity="center"
-            android:padding="24dp"
-            android:text="✈\n\nNo trips yet\n\nStart planning your next adventure!"
-            android:textColor="#718096"
-            android:textSize="17sp"
-            android:lineSpacingExtra="6dp"
-            android:visibility="gone" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:text="Your journeys"
+                android:textColor="#142B49"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvEmptyState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="#EDF3FA"
+                android:gravity="center"
+                android:padding="28dp"
+                android:text="✈\n\nNo trips yet\n\nStart planning your next adventure!"
+                android:textColor="#42678F"
+                android:textSize="17sp"
+                android:lineSpacingExtra="6dp"
+                android:visibility="gone" />
+
+            <LinearLayout
+                android:id="@+id/tripsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:orientation="vertical" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

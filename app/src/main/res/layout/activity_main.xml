@@ -1,9 +1,10 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F8F7">
+    android:background="@color/cream">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -15,224 +16,454 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="22dp">
+            android:padding="18dp">
 
-            <!-- App logo -->
-            <TextView
-                android:id="@+id/tvLogo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BHtravel"
-                android:textColor="#142B49"
-                android:textSize="26sp"
-                android:textStyle="bold" />
-
-            <!-- Greeting -->
-            <TextView
-                android:id="@+id/tvGreeting"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Hello, Byushra!"
-                android:textColor="#142B49"
-                android:textSize="28sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvSubtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="6dp"
-                android:text="Where would you like to go next?"
-                android:textColor="#526D78"
-                android:textSize="14sp" />
-
-            <!-- Featured destination -->
-            <FrameLayout
-                android:id="@+id/cardFeaturedDestination"
-                android:layout_width="match_parent"
-                android:layout_height="210dp"
-                android:layout_marginTop="24dp"
-                android:background="@drawable/santorini"
-                android:clipToOutline="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="bottom"
-                    android:orientation="vertical"
-                    android:padding="18dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="#EFFFFFFF"
-                        android:padding="6dp"
-                        android:text="YOUR NEXT ADVENTURE"
-                        android:textColor="#142B49"
-                        android:textSize="11sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:background="#EFFFFFFF"
-                        android:padding="6dp"
-                        android:text="Discover Santorini"
-                        android:textColor="#142B49"
-                        android:textSize="23sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:background="#EFFFFFFF"
-                        android:padding="5dp"
-                        android:text="Greece  •  Your next destination"
-                        android:textColor="#142B49"
-                        android:textSize="12sp" />
-
-                </LinearLayout>
-            </FrameLayout>
-
-            <!-- Quick actions title -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Quick actions"
-                android:textColor="#142B49"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!-- First row -->
+            <!-- BRAND HEADER -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:layout_marginTop="15dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/btnNewTrip"
+                    android:id="@+id/tvLogo"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="7dp"
-                    android:background="@drawable/bg_action_teal"
-                    android:gravity="center"
-                    android:text="＋\nNew Trip"
-                    android:textColor="#142B49"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-                <TextView
-                    android:id="@+id/btnItinerary"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginStart="7dp"
-                    android:background="@drawable/bg_action_blue"
-                    android:gravity="center"
-                    android:text="▤\nItinerary"
-                    android:textColor="#142B49"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-            </LinearLayout>
-
-            <!-- Second row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="85dp"
-                android:layout_marginTop="12dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/btnBudget"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginEnd="7dp"
-                    android:background="@drawable/bg_action_blue"
-                    android:gravity="center"
-                    android:text="€\nBudget"
-                    android:textColor="#142B49"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-                <TextView
-                    android:id="@+id/btnExplore"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:layout_marginStart="7dp"
-                    android:background="@drawable/bg_action_teal"
-                    android:gravity="center"
-                    android:text="⌖\nExplore"
-                    android:textColor="#142B49"
-                    android:textSize="15sp"
-                    android:textStyle="bold"
-                    android:clickable="true"
-                    android:focusable="true" />
-
-            </LinearLayout>
-
-            <!-- Upcoming trips -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Upcoming trips"
-                android:textColor="#142B49"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:id="@+id/cardUpcomingMilan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:background="@drawable/bg_trip_card"
-                android:orientation="vertical"
-                android:padding="17dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="🇮🇹  Milan, Italy"
-                    android:textColor="#142B49"
-                    android:textSize="17sp"
+                    android:layout_weight="1"
+                    android:text="BHtravel"
+                    android:textColor="@color/navy"
+                    android:textSize="28sp"
                     android:textStyle="bold" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    android:text="6 Dec – 9 Dec 2026"
-                    android:textColor="#526D78"
-                    android:textSize="13sp" />
+                    android:text="☁   ✈"
+                    android:textColor="@color/navy"
+                    android:textSize="25sp" />
+            </LinearLayout>
+
+
+            <!-- WELCOME SECTION -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="190dp"
+                android:layout_marginTop="22dp"
+                app:cardBackgroundColor="#C6D7EA"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingStart="18dp"
+                    android:paddingEnd="10dp">
+
+                    <!-- Greeting -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvGreeting"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hello, Byushra! 👋"
+                            android:textColor="@color/navy"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvSubtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="Where would you like to go next?"
+                            android:textColor="#42678F"
+                            android:textSize="13sp" />
+
+                    </LinearLayout>
+
+                    <!-- Airplane and Cloud -->
+                    <RelativeLayout
+                        android:layout_width="125dp"
+                        android:layout_height="145dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_centerHorizontal="true"
+                            android:text="☁"
+                            android:textColor="#FFFFFF"
+                            android:textSize="65sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="12dp"
+                            android:text="✈"
+                            android:textColor="@color/navy"
+                            android:textSize="65sp" />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- PARIS FEATURED DESTINATION -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="210dp"
+                android:layout_marginTop="18dp"
+                app:cardCornerRadius="22dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <FrameLayout
+                    android:id="@+id/cardFeaturedDestination"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/paris">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="#55142B49"
+                        android:gravity="bottom"
+                        android:orientation="vertical"
+                        android:padding="17dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="#CC142B49"
+                            android:padding="7dp"
+                            android:text="YOUR NEXT ADVENTURE"
+                            android:textColor="#FFFFFF"
+                            android:textSize="11sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:background="#CC142B49"
+                            android:padding="7dp"
+                            android:text="Discover Paris"
+                            android:textColor="#FFFFFF"
+                            android:textSize="23sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:background="#CC142B49"
+                            android:padding="6dp"
+                            android:text="France  •  The city of light, culture and romance"
+                            android:textColor="#FFFFFF"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+                </FrameLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- CREATE NEW TRIP -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNewTrip"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="16dp"
+                android:text="+  Create a New Trip"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@color/navy"
+                app:cornerRadius="16dp"
+                app:iconTint="@color/white" />
+
+            <!-- TRAVEL SHORTCUTS -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Your travel shortcuts"
+                android:textColor="@color/navy"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="112dp"
+                android:layout_marginTop="12dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
+                    app:cardBackgroundColor="@color/light_blue"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:id="@+id/btnFindFlights"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="✈&#10;Find Flights"
+                        android:textColor="@color/navy"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginHorizontal="5dp"
+                    app:cardBackgroundColor="@color/light_blue"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:id="@+id/btnBookHotels"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="▱&#10;Book Hotels"
+                        android:textColor="@color/navy"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
+                    app:cardBackgroundColor="@color/light_blue"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp">
+
+                    <TextView
+                        android:id="@+id/btnRentCar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="🚗&#10;Rent a Car"
+                        android:textColor="@color/navy"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:clickable="true"
+                        android:focusable="true" />
+                </com.google.android.material.card.MaterialCardView>
 
             </LinearLayout>
+
+            <!-- UPCOMING TRIPS HEADER -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Upcoming trips"
+                    android:textColor="@color/navy"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="See all  ›"
+                    android:textColor="@color/navy"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- MILAN -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="@color/light_blue"
+                app:cardCornerRadius="17dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:id="@+id/cardUpcomingMilan"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="92dp"
+                        android:layout_height="84dp"
+                        android:contentDescription="Milan Cathedral"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/milano" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🇮🇹  Milan, Italy"
+                            android:textColor="@color/navy"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:text="6 – 9 December 2026"
+                            android:textColor="#526982"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- VIENNA -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/light_blue"
+                app:cardCornerRadius="17dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:id="@+id/cardUpcomingVienna"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="92dp"
+                        android:layout_height="84dp"
+                        android:contentDescription="Vienna State Opera"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/vienna" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🇦🇹  Vienna, Austria"
+                            android:textColor="@color/navy"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:text="31 December 2026 – 2 January 2027"
+                            android:textColor="#526982"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- AMSTERDAM -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="104dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="18dp"
+                app:cardBackgroundColor="@color/light_blue"
+                app:cardCornerRadius="17dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:id="@+id/cardUpcomingAmsterdam"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="92dp"
+                        android:layout_height="84dp"
+                        android:contentDescription="Amsterdam canal"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/amsterdam" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="🇳🇱  Amsterdam, Netherlands"
+                            android:textColor="@color/navy"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:text="12 – 15 February 2027"
+                            android:textColor="#526982"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
         </LinearLayout>
     </ScrollView>
 
-    <!-- Bottom navigation -->
+    <!-- BOTTOM NAVIGATION -->
     <LinearLayout
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:background="#FFFFFF"
+        android:layout_height="66dp"
+        android:background="@color/white"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:elevation="8dp">
 
         <TextView
             android:id="@+id/navHome"
@@ -240,8 +471,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="⌂\nHome"
-            android:textColor="#168B8B"
+            android:text="⌂&#10;Home"
+            android:textColor="@color/navy"
             android:textSize="12sp"
             android:textStyle="bold"
             android:clickable="true"
@@ -253,8 +484,20 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="▣\nTrips"
-            android:textColor="#526D78"
+            android:text="▣&#10;My Trips"
+            android:textColor="#718096"
+            android:textSize="11sp"
+            android:clickable="true"
+            android:focusable="true" />
+
+        <TextView
+            android:id="@+id/navOffers"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="◇&#10;Offers"
+            android:textColor="#718096"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true" />
@@ -265,20 +508,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="⌖\nExplore"
-            android:textColor="#526D78"
-            android:textSize="12sp"
-            android:clickable="true"
-            android:focusable="true" />
-
-        <TextView
-            android:id="@+id/navBudget"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="€\nBudget"
-            android:textColor="#526D78"
+            android:text="⌖&#10;Explore"
+            android:textColor="#718096"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true" />
@@ -289,8 +520,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="●\nProfile"
-            android:textColor="#526D78"
+            android:text="●&#10;Profile"
+            android:textColor="#718096"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true" />
