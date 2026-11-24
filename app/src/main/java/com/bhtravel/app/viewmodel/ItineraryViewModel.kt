@@ -10,12 +10,9 @@ import com.bhtravel.app.data.repository.ItineraryRepository
 import kotlinx.coroutines.launch
 
 class ItineraryViewModel(
-    private val repository: ItineraryRepository
+    private val repository: ItineraryRepository,
 ) : ViewModel() {
-
-    fun getItemsForTrip(tripId: Int): LiveData<List<ItineraryItemEntity>> {
-        return repository.getItemsForTrip(tripId).asLiveData()
-    }
+    fun getItemsForTrip(tripId: Int): LiveData<List<ItineraryItemEntity>> = repository.getItemsForTrip(tripId).asLiveData()
 
     fun insertItem(item: ItineraryItemEntity) {
         viewModelScope.launch {

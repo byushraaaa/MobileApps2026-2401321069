@@ -17,7 +17,6 @@ import java.util.Calendar
 import java.util.Locale
 
 class NewTripActivity : AppCompatActivity() {
-
     companion object {
         const val EXTRA_TRIP_ID = "trip_id"
         const val EXTRA_DESTINATION = "extra_destination"
@@ -70,10 +69,10 @@ class NewTripActivity : AppCompatActivity() {
             loadTrip(editingTripId)
         } else {
             etDestination.setText(
-                intent.getStringExtra(EXTRA_DESTINATION) ?: ""
+                intent.getStringExtra(EXTRA_DESTINATION) ?: "",
             )
             etCountry.setText(
-                intent.getStringExtra(EXTRA_COUNTRY) ?: ""
+                intent.getStringExtra(EXTRA_COUNTRY) ?: "",
             )
         }
 
@@ -100,11 +99,12 @@ class NewTripActivity : AppCompatActivity() {
                 val trip = repository.getTripById(tripId)
 
                 if (trip == null) {
-                    Toast.makeText(
-                        this@NewTripActivity,
-                        "Trip not found.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast
+                        .makeText(
+                            this@NewTripActivity,
+                            "Trip not found.",
+                            Toast.LENGTH_SHORT,
+                        ).show()
                     finish()
                     return@launch
                 }
@@ -117,23 +117,25 @@ class NewTripActivity : AppCompatActivity() {
                 originalDestination = trip.destination
                 originalImageName = trip.imageUrl
 
-                startDate = Calendar.getInstance().apply {
-                    time = dateFormat.parse(trip.startDate)!!
-                }
+                startDate =
+                    Calendar.getInstance().apply {
+                        time = dateFormat.parse(trip.startDate)!!
+                    }
 
-                endDate = Calendar.getInstance().apply {
-                    time = dateFormat.parse(trip.endDate)!!
-                }
+                endDate =
+                    Calendar.getInstance().apply {
+                        time = dateFormat.parse(trip.endDate)!!
+                    }
 
                 btnStartDate.text = trip.startDate
                 btnEndDate.text = trip.endDate
-
             } catch (exception: Exception) {
-                Toast.makeText(
-                    this@NewTripActivity,
-                    "Could not load the trip.",
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast
+                    .makeText(
+                        this@NewTripActivity,
+                        "Could not load the trip.",
+                        Toast.LENGTH_LONG,
+                    ).show()
                 finish()
             }
         }
@@ -144,51 +146,53 @@ class NewTripActivity : AppCompatActivity() {
         val calendar =
             (selectedDate ?: Calendar.getInstance()).clone() as Calendar
 
-        val datePicker = DatePickerDialog(
-            this,
-            { _, year, month, dayOfMonth ->
+        val datePicker =
+            DatePickerDialog(
+                this,
+                { _, year, month, dayOfMonth ->
 
-                val chosenDate = Calendar.getInstance().apply {
-                    set(year, month, dayOfMonth, 0, 0, 0)
-                    set(Calendar.MILLISECOND, 0)
-                }
+                    val chosenDate =
+                        Calendar.getInstance().apply {
+                            set(year, month, dayOfMonth, 0, 0, 0)
+                            set(Calendar.MILLISECOND, 0)
+                        }
 
-                if (isStartDate) {
-                    startDate = chosenDate
+                    if (isStartDate) {
+                        startDate = chosenDate
 
-                    btnStartDate.text =
-                        dateFormat.format(chosenDate.time)
-
-                    if (endDate != null &&
-                        endDate!!.before(chosenDate)
-                    ) {
-                        endDate = null
-                        btnEndDate.text = "Choose end date"
-                    }
-
-                } else {
-                    val chosenStartDate = startDate
-
-                    if (chosenStartDate != null &&
-                        chosenDate.before(chosenStartDate)
-                    ) {
-                        Toast.makeText(
-                            this,
-                            "End date cannot be before start date.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    } else {
-                        endDate = chosenDate
-
-                        btnEndDate.text =
+                        btnStartDate.text =
                             dateFormat.format(chosenDate.time)
+
+                        if (endDate != null &&
+                            endDate!!.before(chosenDate)
+                        ) {
+                            endDate = null
+                            btnEndDate.text = "Choose end date"
+                        }
+                    } else {
+                        val chosenStartDate = startDate
+
+                        if (chosenStartDate != null &&
+                            chosenDate.before(chosenStartDate)
+                        ) {
+                            Toast
+                                .makeText(
+                                    this,
+                                    "End date cannot be before start date.",
+                                    Toast.LENGTH_SHORT,
+                                ).show()
+                        } else {
+                            endDate = chosenDate
+
+                            btnEndDate.text =
+                                dateFormat.format(chosenDate.time)
+                        }
                     }
-                }
-            },
-            calendar.get(Calendar.YEAR),
-            calendar.get(Calendar.MONTH),
-            calendar.get(Calendar.DAY_OF_MONTH)
-        )
+                },
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH),
+            )
 
         if (!isStartDate && startDate != null) {
             datePicker.datePicker.minDate =
@@ -198,9 +202,8 @@ class NewTripActivity : AppCompatActivity() {
         datePicker.show()
     }
 
-    private fun getDestinationImage(destination: String): String? {
-        return when (destination.trim().lowercase(Locale.ROOT)) {
-
+    private fun getDestinationImage(destination: String): String? =
+        when (destination.trim().lowercase(Locale.ROOT)) {
             "plovdiv", "пловдив" -> "plovdiv"
 
             "dubai", "дубай" -> "dubai"
@@ -233,7 +236,6 @@ class NewTripActivity : AppCompatActivity() {
 
             else -> null
         }
-    }
 
     private fun validateTrip() {
         val destination = etDestination.text.toString().trim()
@@ -241,13 +243,14 @@ class NewTripActivity : AppCompatActivity() {
         val travelersText = etTravelers.text.toString().trim()
         val notes = etNotes.text.toString().trim()
 
-        val validationError = TripValidator.validate(
-            destination = destination,
-            country = country,
-            startDateMillis = startDate?.timeInMillis,
-            endDateMillis = endDate?.timeInMillis,
-            travelersText = travelersText
-        )
+        val validationError =
+            TripValidator.validate(
+                destination = destination,
+                country = country,
+                startDateMillis = startDate?.timeInMillis,
+                endDateMillis = endDate?.timeInMillis,
+                travelersText = travelersText,
+            )
 
         when (validationError) {
             TripValidationError.DESTINATION_REQUIRED -> {
@@ -263,29 +266,32 @@ class NewTripActivity : AppCompatActivity() {
             }
 
             TripValidationError.START_DATE_REQUIRED -> {
-                Toast.makeText(
-                    this,
-                    "Please choose a start date.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this,
+                        "Please choose a start date.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 return
             }
 
             TripValidationError.END_DATE_REQUIRED -> {
-                Toast.makeText(
-                    this,
-                    "Please choose an end date.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this,
+                        "Please choose an end date.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 return
             }
 
             TripValidationError.INVALID_DATE_RANGE -> {
-                Toast.makeText(
-                    this,
-                    "End date cannot be before start date.",
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast
+                    .makeText(
+                        this,
+                        "End date cannot be before start date.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
                 return
             }
 
@@ -302,25 +308,27 @@ class NewTripActivity : AppCompatActivity() {
 
         val travelers = travelersText.toIntOrNull()!!
 
-        val selectedImage = if (
-            editingTripId != 0 &&
-            destination.equals(originalDestination, ignoreCase = true)
-        ) {
-            originalImageName
-        } else {
-            getDestinationImage(destination)
-        }
+        val selectedImage =
+            if (
+                editingTripId != 0 &&
+                destination.equals(originalDestination, ignoreCase = true)
+            ) {
+                originalImageName
+            } else {
+                getDestinationImage(destination)
+            }
 
-        val trip = TripEntity(
-            id = editingTripId,
-            destination = destination,
-            country = country,
-            startDate = dateFormat.format(startDate!!.time),
-            endDate = dateFormat.format(endDate!!.time),
-            travelers = travelers,
-            notes = notes,
-            imageUrl = selectedImage
-        )
+        val trip =
+            TripEntity(
+                id = editingTripId,
+                destination = destination,
+                country = country,
+                startDate = dateFormat.format(startDate!!.time),
+                endDate = dateFormat.format(endDate!!.time),
+                travelers = travelers,
+                notes = notes,
+                imageUrl = selectedImage,
+            )
 
         saveTrip(trip)
     }
@@ -331,30 +339,31 @@ class NewTripActivity : AppCompatActivity() {
                 if (editingTripId == 0) {
                     repository.insertTrip(trip)
 
-                    Toast.makeText(
-                        this@NewTripActivity,
-                        "Trip saved successfully!",
-                        Toast.LENGTH_LONG
-                    ).show()
-
+                    Toast
+                        .makeText(
+                            this@NewTripActivity,
+                            "Trip saved successfully!",
+                            Toast.LENGTH_LONG,
+                        ).show()
                 } else {
                     repository.updateTrip(trip)
 
-                    Toast.makeText(
-                        this@NewTripActivity,
-                        "Trip updated successfully!",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast
+                        .makeText(
+                            this@NewTripActivity,
+                            "Trip updated successfully!",
+                            Toast.LENGTH_LONG,
+                        ).show()
                 }
 
                 finish()
-
             } catch (exception: Exception) {
-                Toast.makeText(
-                    this@NewTripActivity,
-                    "Could not save the trip. Please try again.",
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast
+                    .makeText(
+                        this@NewTripActivity,
+                        "Could not save the trip. Please try again.",
+                        Toast.LENGTH_LONG,
+                    ).show()
             }
         }
     }

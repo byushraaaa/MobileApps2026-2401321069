@@ -12,5 +12,5 @@ data class FavoriteOfferEntity(
     val description: String,
     val duration: String,
     val price: String,
-    val imageName: String
+    val imageName: String,
 )

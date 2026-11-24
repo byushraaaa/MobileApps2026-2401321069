@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BHtravel</string>
+    <string name="open_my_location_in_maps">Open my location in Maps</string>
 </resources>

@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TripDao {
-
     @Query("SELECT * FROM trips ORDER BY id DESC")
     fun getAllTrips(): Flow<List<TripEntity>>
 

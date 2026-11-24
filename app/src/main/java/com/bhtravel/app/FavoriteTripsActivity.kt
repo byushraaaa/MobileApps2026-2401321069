@@ -2,7 +2,6 @@
 package com.bhtravel.app
 
 import android.os.Bundle
-import android.view.Gravity
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -17,7 +16,6 @@ import com.google.android.material.card.MaterialCardView
 import kotlinx.coroutines.launch
 
 class FavoriteTripsActivity : AppCompatActivity() {
-
     private lateinit var favoritesContainer: LinearLayout
     private lateinit var emptyMessage: TextView
 
@@ -58,83 +56,93 @@ class FavoriteTripsActivity : AppCompatActivity() {
         }
     }
 
-    private fun createFavoriteCard(
-        favorite: FavoriteOfferEntity
-    ): MaterialCardView {
+    private fun createFavoriteCard(favorite: FavoriteOfferEntity): MaterialCardView {
+        val card =
+            MaterialCardView(this).apply {
+                radius = dp(18).toFloat()
+                cardElevation = dp(1).toFloat()
+                setCardBackgroundColor(getColor(android.R.color.white))
 
-        val card = MaterialCardView(this).apply {
-            radius = dp(18).toFloat()
-            cardElevation = dp(1).toFloat()
-            setCardBackgroundColor(getColor(android.R.color.white))
-
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                bottomMargin = dp(14)
+                layoutParams =
+                    LinearLayout
+                        .LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                        ).apply {
+                            bottomMargin = dp(14)
+                        }
             }
-        }
 
-        val content = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(14), dp(14), dp(14), dp(14))
-        }
+        val content =
+            LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(dp(14), dp(14), dp(14), dp(14))
+            }
 
-        val image = ImageView(this).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                dp(150)
-            )
-            scaleType = ImageView.ScaleType.CENTER_CROP
+        val image =
+            ImageView(this).apply {
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        dp(150),
+                    )
+                scaleType = ImageView.ScaleType.CENTER_CROP
 
-            val imageId = resources.getIdentifier(
-                favorite.imageName,
-                "drawable",
-                packageName
-            )
+                val imageId =
+                    resources.getIdentifier(
+                        favorite.imageName,
+                        "drawable",
+                        packageName,
+                    )
 
-            setImageResource(
-                if (imageId != 0) imageId else R.drawable.travel
-            )
-        }
+                setImageResource(
+                    if (imageId != 0) imageId else R.drawable.travel,
+                )
+            }
 
-        val title = TextView(this).apply {
-            text = favorite.destination
-            textSize = 19f
-            setTextColor(getColor(android.R.color.primary_text_light))
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setPadding(0, dp(12), 0, dp(4))
-        }
+        val title =
+            TextView(this).apply {
+                text = favorite.destination
+                textSize = 19f
+                setTextColor(getColor(android.R.color.primary_text_light))
+                setTypeface(null, android.graphics.Typeface.BOLD)
+                setPadding(0, dp(12), 0, dp(4))
+            }
 
-        val country = TextView(this).apply {
-            text = favorite.country
-            textSize = 14f
-        }
+        val country =
+            TextView(this).apply {
+                text = favorite.country
+                textSize = 14f
+            }
 
-        val duration = TextView(this).apply {
-            text = favorite.duration
-            textSize = 14f
-            setPadding(0, dp(8), 0, 0)
-        }
+        val duration =
+            TextView(this).apply {
+                text = favorite.duration
+                textSize = 14f
+                setPadding(0, dp(8), 0, 0)
+            }
 
-        val price = TextView(this).apply {
-            text = favorite.price
-            textSize = 16f
-            setTypeface(null, android.graphics.Typeface.BOLD)
-            setPadding(0, dp(8), 0, dp(10))
-        }
+        val price =
+            TextView(this).apply {
+                text = favorite.price
+                textSize = 16f
+                setTypeface(null, android.graphics.Typeface.BOLD)
+                setPadding(0, dp(8), 0, dp(10))
+            }
 
-        val removeButton = MaterialButton(this).apply {
-            text = "Remove from Favorites"
-            isAllCaps = false
-            setOnClickListener {
-                lifecycleScope.launch {
-                    DatabaseProvider.getDatabase(this@FavoriteTripsActivity)
-                        .favoriteOfferDao()
-                        .removeFavoriteByDestination(favorite.destination)
+        val removeButton =
+            MaterialButton(this).apply {
+                text = "Remove from Favorites"
+                isAllCaps = false
+                setOnClickListener {
+                    lifecycleScope.launch {
+                        DatabaseProvider
+                            .getDatabase(this@FavoriteTripsActivity)
+                            .favoriteOfferDao()
+                            .removeFavoriteByDestination(favorite.destination)
+                    }
                 }
             }
-        }
 
         content.addView(image)
         content.addView(title)
@@ -147,7 +155,5 @@ class FavoriteTripsActivity : AppCompatActivity() {
         return card
     }
 
-    private fun dp(value: Int): Int {
-        return (value * resources.displayMetrics.density).toInt()
-    }
+    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 }

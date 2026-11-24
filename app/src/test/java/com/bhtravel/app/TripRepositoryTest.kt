@@ -13,32 +13,30 @@ import org.junit.Assert.assertNull
 import org.junit.Test
 
 class TripRepositoryTest {
-
     private class FakeTripDao : TripDao {
-
         private val trips = MutableStateFlow<List<TripEntity>>(emptyList())
         private var nextId = 1
 
         override fun getAllTrips(): Flow<List<TripEntity>> = trips
 
-        override suspend fun getTripById(tripId: Int): TripEntity? {
-            return trips.value.find { it.id == tripId }
-        }
+        override suspend fun getTripById(tripId: Int): TripEntity? = trips.value.find { it.id == tripId }
 
         override suspend fun insertTrip(trip: TripEntity) {
-            val newTrip = if (trip.id == 0) {
-                trip.copy(id = nextId++)
-            } else {
-                trip
-            }
+            val newTrip =
+                if (trip.id == 0) {
+                    trip.copy(id = nextId++)
+                } else {
+                    trip
+                }
 
             trips.value = trips.value + newTrip
         }
 
         override suspend fun updateTrip(trip: TripEntity) {
-            trips.value = trips.value.map {
-                if (it.id == trip.id) trip else it
-            }
+            trips.value =
+                trips.value.map {
+                    if (it.id == trip.id) trip else it
+                }
         }
 
         override suspend fun deleteTrip(trip: TripEntity) {
@@ -46,93 +44,96 @@ class TripRepositoryTest {
         }
     }
 
-    private fun createRepository(): TripRepository {
-        return TripRepository(FakeTripDao())
-    }
+    private fun createRepository(): TripRepository = TripRepository(FakeTripDao())
 
     private fun createTrip(
         id: Int = 0,
         destination: String = "Paris",
-        country: String = "France"
-    ): TripEntity {
-        return TripEntity(
+        country: String = "France",
+    ): TripEntity =
+        TripEntity(
             id = id,
             destination = destination,
             country = country,
             startDate = "2026-12-10",
             endDate = "2026-12-15",
             travelers = 2,
-            notes = "Test trip"
+            notes = "Test trip",
         )
-    }
 
     @Test
-    fun insertTrip_addsTripToRepository() = runBlocking {
-        val repository = createRepository()
+    fun insertTrip_addsTripToRepository() =
+        runBlocking {
+            val repository = createRepository()
 
-        repository.insertTrip(createTrip())
+            repository.insertTrip(createTrip())
 
-        val trips = repository.allTrips.first()
+            val trips = repository.allTrips.first()
 
-        assertEquals(1, trips.size)
-        assertEquals("Paris", trips.first().destination)
-    }
-
-    @Test
-    fun getTripById_returnsExistingTrip() = runBlocking {
-        val repository = createRepository()
-
-        repository.insertTrip(createTrip())
-
-        val insertedTrip = repository.allTrips.first().first()
-        val result = repository.getTripById(insertedTrip.id)
-
-        assertNotNull(result)
-        assertEquals("Paris", result?.destination)
-    }
+            assertEquals(1, trips.size)
+            assertEquals("Paris", trips.first().destination)
+        }
 
     @Test
-    fun getTripById_returnsNullForMissingTrip() = runBlocking {
-        val repository = createRepository()
+    fun getTripById_returnsExistingTrip() =
+        runBlocking {
+            val repository = createRepository()
 
-        val result = repository.getTripById(999)
+            repository.insertTrip(createTrip())
 
-        assertNull(result)
-    }
+            val insertedTrip = repository.allTrips.first().first()
+            val result = repository.getTripById(insertedTrip.id)
 
-    @Test
-    fun updateTrip_changesExistingTrip() = runBlocking {
-        val repository = createRepository()
-
-        repository.insertTrip(createTrip())
-
-        val insertedTrip = repository.allTrips.first().first()
-        val updatedTrip = insertedTrip.copy(destination = "Rome")
-
-        repository.updateTrip(updatedTrip)
-
-        val result = repository.getTripById(insertedTrip.id)
-
-        assertEquals("Rome", result?.destination)
-    }
+            assertNotNull(result)
+            assertEquals("Paris", result?.destination)
+        }
 
     @Test
-    fun deleteTrip_removesTripFromRepository() = runBlocking {
-        val repository = createRepository()
+    fun getTripById_returnsNullForMissingTrip() =
+        runBlocking {
+            val repository = createRepository()
 
-        repository.insertTrip(createTrip())
+            val result = repository.getTripById(999)
 
-        val insertedTrip = repository.allTrips.first().first()
-
-        repository.deleteTrip(insertedTrip)
-
-        assertEquals(0, repository.allTrips.first().size)
-    }
+            assertNull(result)
+        }
 
     @Test
-    fun allTrips_returnsEmptyListInitially() = runBlocking {
-        val repository = createRepository()
+    fun updateTrip_changesExistingTrip() =
+        runBlocking {
+            val repository = createRepository()
 
-        assertEquals(0, repository.allTrips.first().size)
-    }
+            repository.insertTrip(createTrip())
+
+            val insertedTrip = repository.allTrips.first().first()
+            val updatedTrip = insertedTrip.copy(destination = "Rome")
+
+            repository.updateTrip(updatedTrip)
+
+            val result = repository.getTripById(insertedTrip.id)
+
+            assertEquals("Rome", result?.destination)
+        }
+
+    @Test
+    fun deleteTrip_removesTripFromRepository() =
+        runBlocking {
+            val repository = createRepository()
+
+            repository.insertTrip(createTrip())
+
+            val insertedTrip = repository.allTrips.first().first()
+
+            repository.deleteTrip(insertedTrip)
+
+            assertEquals(0, repository.allTrips.first().size)
+        }
+
+    @Test
+    fun allTrips_returnsEmptyListInitially() =
+        runBlocking {
+            val repository = createRepository()
+
+            assertEquals(0, repository.allTrips.first().size)
+        }
 }

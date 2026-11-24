@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.card.MaterialCardView
 
 class OffersActivity : AppCompatActivity() {
-
     private val navyBlue = Color.parseColor("#142B49")
     private val lightBlue = Color.parseColor("#DCE8F5")
     private val white = Color.WHITE
@@ -48,7 +47,7 @@ class OffersActivity : AppCompatActivity() {
                 "Discover the Russian capital, explore its famous Red Square, beautiful architecture and rich cultural history.",
                 "4 days",
                 "From €349 / person",
-                R.drawable.moscow
+                R.drawable.moscow,
             )
         }
 
@@ -60,7 +59,7 @@ class OffersActivity : AppCompatActivity() {
                 "Enjoy Lisbon's colorful streets, historic neighborhoods, ocean views and delicious Portuguese cuisine.",
                 "5 days",
                 "From €399 / person",
-                R.drawable.lisbon
+                R.drawable.lisbon,
             )
         }
 
@@ -72,7 +71,7 @@ class OffersActivity : AppCompatActivity() {
                 "Experience Cappadocia's unique rock formations, magical valleys and unforgettable hot-air balloon views.",
                 "3 days",
                 "From €299 / person",
-                R.drawable.cappadocia
+                R.drawable.cappadocia,
             )
         }
 
@@ -84,7 +83,7 @@ class OffersActivity : AppCompatActivity() {
                 "Enjoy a mountain escape with beautiful scenery, fresh air, winter activities and traditional Bulgarian atmosphere.",
                 "4 days",
                 "From €249 / person",
-                R.drawable.bansko
+                R.drawable.bansko,
             )
         }
 
@@ -96,7 +95,7 @@ class OffersActivity : AppCompatActivity() {
                 "Explore Madrid's lively streets, impressive museums, beautiful parks and Spanish culture.",
                 "4 days",
                 "From €329 / person",
-                R.drawable.madrid
+                R.drawable.madrid,
             )
         }
 
@@ -124,11 +123,12 @@ class OffersActivity : AppCompatActivity() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         } catch (e: Exception) {
-            Toast.makeText(
-                this,
-                "Unable to open the website.",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast
+                .makeText(
+                    this,
+                    "Unable to open the website.",
+                    Toast.LENGTH_SHORT,
+                ).show()
         }
     }
 
@@ -138,16 +138,17 @@ class OffersActivity : AppCompatActivity() {
         description: String,
         duration: String,
         price: String,
-        image: Int
+        image: Int,
     ) {
-        val intent = Intent(this, OfferDetailsActivity::class.java).apply {
-            putExtra(OfferDetailsActivity.EXTRA_DESTINATION, destination)
-            putExtra(OfferDetailsActivity.EXTRA_COUNTRY, country)
-            putExtra(OfferDetailsActivity.EXTRA_DESCRIPTION, description)
-            putExtra(OfferDetailsActivity.EXTRA_DURATION, duration)
-            putExtra(OfferDetailsActivity.EXTRA_PRICE, price)
-            putExtra(OfferDetailsActivity.EXTRA_IMAGE, image)
-        }
+        val intent =
+            Intent(this, OfferDetailsActivity::class.java).apply {
+                putExtra(OfferDetailsActivity.EXTRA_DESTINATION, destination)
+                putExtra(OfferDetailsActivity.EXTRA_COUNTRY, country)
+                putExtra(OfferDetailsActivity.EXTRA_DESCRIPTION, description)
+                putExtra(OfferDetailsActivity.EXTRA_DURATION, duration)
+                putExtra(OfferDetailsActivity.EXTRA_PRICE, price)
+                putExtra(OfferDetailsActivity.EXTRA_IMAGE, image)
+            }
 
         startActivity(intent)
     }

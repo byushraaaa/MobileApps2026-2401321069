@@ -10,16 +10,11 @@ import com.bhtravel.app.data.repository.ExpenseRepository
 import kotlinx.coroutines.launch
 
 class ExpenseViewModel(
-    private val repository: ExpenseRepository
+    private val repository: ExpenseRepository,
 ) : ViewModel() {
+    fun getExpensesForTrip(tripId: Int): LiveData<List<ExpenseEntity>> = repository.getExpensesForTrip(tripId).asLiveData()
 
-    fun getExpensesForTrip(tripId: Int): LiveData<List<ExpenseEntity>> {
-        return repository.getExpensesForTrip(tripId).asLiveData()
-    }
-
-    fun getTotalForTrip(tripId: Int): LiveData<Double?> {
-        return repository.getTotalForTrip(tripId).asLiveData()
-    }
+    fun getTotalForTrip(tripId: Int): LiveData<Double?> = repository.getTotalForTrip(tripId).asLiveData()
 
     fun insertExpense(expense: ExpenseEntity) {
         viewModelScope.launch {

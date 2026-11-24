@@ -14,7 +14,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.lifecycleScope
 import com.bhtravel.app.data.database.DatabaseProvider
 import com.bhtravel.app.data.entity.ItineraryItemEntity
 import com.bhtravel.app.data.entity.TripEntity
@@ -31,7 +30,6 @@ import java.util.Calendar
 import java.util.Locale
 
 class ItineraryActivity : AppCompatActivity() {
-
     private lateinit var tripViewModel: TripViewModel
     private lateinit var itineraryViewModel: ItineraryViewModel
 
@@ -50,7 +48,7 @@ class ItineraryActivity : AppCompatActivity() {
     private var selectedTrip: TripEntity? = null
 
     private var currentItemsLiveData:
-            LiveData<List<ItineraryItemEntity>>? = null
+        LiveData<List<ItineraryItemEntity>>? = null
 
     private val dateFormat =
         SimpleDateFormat("dd.MM.yyyy", Locale.getDefault())
@@ -86,10 +84,11 @@ class ItineraryActivity : AppCompatActivity() {
         val tripRepository = TripRepository(database.tripDao())
         val tripFactory = TripViewModelFactory(tripRepository)
 
-        tripViewModel = androidx.lifecycle.ViewModelProvider(
-            this,
-            tripFactory
-        )[TripViewModel::class.java]
+        tripViewModel =
+            androidx.lifecycle.ViewModelProvider(
+                this,
+                tripFactory,
+            )[TripViewModel::class.java]
 
         val itineraryRepository =
             ItineraryRepository(database.itineraryDao())
@@ -97,10 +96,11 @@ class ItineraryActivity : AppCompatActivity() {
         val itineraryFactory =
             ItineraryViewModelFactory(itineraryRepository)
 
-        itineraryViewModel = androidx.lifecycle.ViewModelProvider(
-            this,
-            itineraryFactory
-        )[ItineraryViewModel::class.java]
+        itineraryViewModel =
+            androidx.lifecycle.ViewModelProvider(
+                this,
+                itineraryFactory,
+            )[ItineraryViewModel::class.java]
     }
 
     private fun setupDateAndTimePickers() {
@@ -115,7 +115,7 @@ class ItineraryActivity : AppCompatActivity() {
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
+                calendar.get(Calendar.DAY_OF_MONTH),
             ).show()
         }
 
@@ -130,13 +130,13 @@ class ItineraryActivity : AppCompatActivity() {
                             Locale.getDefault(),
                             "%02d:%02d",
                             hour,
-                            minute
-                        )
+                            minute,
+                        ),
                     )
                 },
                 calendar.get(Calendar.HOUR_OF_DAY),
                 calendar.get(Calendar.MINUTE),
-                true
+                true,
             ).show()
         }
     }
@@ -156,18 +156,20 @@ class ItineraryActivity : AppCompatActivity() {
         tripViewModel.allTrips.observe(this) { tripList ->
             trips = tripList
 
-            val tripNames = trips.map {
-                "${it.destination}, ${it.country}"
-            }
+            val tripNames =
+                trips.map {
+                    "${it.destination}, ${it.country}"
+                }
 
-            val adapter = ArrayAdapter(
-                this,
-                android.R.layout.simple_spinner_item,
-                tripNames
-            )
+            val adapter =
+                ArrayAdapter(
+                    this,
+                    android.R.layout.simple_spinner_item,
+                    tripNames,
+                )
 
             adapter.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item
+                android.R.layout.simple_spinner_dropdown_item,
             )
 
             spinnerTrips.adapter = adapter
@@ -182,12 +184,11 @@ class ItineraryActivity : AppCompatActivity() {
             } else {
                 spinnerTrips.onItemSelectedListener =
                     object : android.widget.AdapterView.OnItemSelectedListener {
-
                         override fun onItemSelected(
                             parent: android.widget.AdapterView<*>?,
                             view: View?,
                             position: Int,
-                            id: Long
+                            id: Long,
                         ) {
                             selectedTrip = trips.getOrNull(position)
                             selectedTrip?.let { trip ->
@@ -197,9 +198,7 @@ class ItineraryActivity : AppCompatActivity() {
                             }
                         }
 
-                        override fun onNothingSelected(
-                            parent: android.widget.AdapterView<*>?
-                        ) {
+                        override fun onNothingSelected(parent: android.widget.AdapterView<*>?) {
                             selectedTrip = null
                         }
                     }
@@ -222,11 +221,12 @@ class ItineraryActivity : AppCompatActivity() {
         val trip = selectedTrip
 
         if (trip == null) {
-            Toast.makeText(
-                this,
-                "Please select a trip first.",
-                Toast.LENGTH_SHORT
-            ).show()
+            Toast
+                .makeText(
+                    this,
+                    "Please select a trip first.",
+                    Toast.LENGTH_SHORT,
+                ).show()
             return
         }
 
@@ -242,32 +242,35 @@ class ItineraryActivity : AppCompatActivity() {
             time.isEmpty() ||
             location.isEmpty()
         ) {
-            Toast.makeText(
-                this,
-                "Please complete the title, date, time and location.",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast
+                .makeText(
+                    this,
+                    "Please complete the title, date, time and location.",
+                    Toast.LENGTH_LONG,
+                ).show()
             return
         }
 
-        val item = ItineraryItemEntity(
-            tripId = trip.id,
-            title = title,
-            description = description,
-            date = date,
-            time = time,
-            location = location
-        )
+        val item =
+            ItineraryItemEntity(
+                tripId = trip.id,
+                title = title,
+                description = description,
+                date = date,
+                time = time,
+                location = location,
+            )
 
         itineraryViewModel.insertItem(item)
 
         clearForm()
 
-        Toast.makeText(
-            this,
-            "Activity added successfully!",
-            Toast.LENGTH_SHORT
-        ).show()
+        Toast
+            .makeText(
+                this,
+                "Activity added successfully!",
+                Toast.LENGTH_SHORT,
+            ).show()
     }
 
     private fun clearForm() {
@@ -278,9 +281,7 @@ class ItineraryActivity : AppCompatActivity() {
         etLocation.text.clear()
     }
 
-    private fun displayActivities(
-        items: List<ItineraryItemEntity>
-    ) {
+    private fun displayActivities(items: List<ItineraryItemEntity>) {
         activitiesContainer.removeAllViews()
 
         tvActivityCount.text =
@@ -290,70 +291,78 @@ class ItineraryActivity : AppCompatActivity() {
             if (items.isEmpty()) View.VISIBLE else View.GONE
 
         items.forEach { item ->
-            val card = MaterialCardView(this).apply {
-                radius = 18f
-                cardElevation = 2f
-                setCardBackgroundColor(
-                    android.graphics.Color.WHITE
-                )
-                useCompatPadding = true
-                layoutParams = LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-                ).apply {
-                    bottomMargin = 12
+            val card =
+                MaterialCardView(this).apply {
+                    radius = 18f
+                    cardElevation = 2f
+                    setCardBackgroundColor(
+                        android.graphics.Color.WHITE,
+                    )
+                    useCompatPadding = true
+                    layoutParams =
+                        LinearLayout
+                            .LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT,
+                            ).apply {
+                                bottomMargin = 12
+                            }
                 }
-            }
 
-            val content = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                setPadding(18, 16, 18, 16)
-            }
+            val content =
+                LinearLayout(this).apply {
+                    orientation = LinearLayout.VERTICAL
+                    setPadding(18, 16, 18, 16)
+                }
 
-            val title = TextView(this).apply {
-                text = item.title
-                textSize = 18f
-                setTextColor(
-                    android.graphics.Color.rgb(23, 50, 77)
-                )
-                setTypeface(null, android.graphics.Typeface.BOLD)
-            }
+            val title =
+                TextView(this).apply {
+                    text = item.title
+                    textSize = 18f
+                    setTextColor(
+                        android.graphics.Color.rgb(23, 50, 77),
+                    )
+                    setTypeface(null, android.graphics.Typeface.BOLD)
+                }
 
-            val details = TextView(this).apply {
-                text = "${item.date}  •  ${item.time}\n${item.location}"
-                textSize = 14f
-                setTextColor(
-                    android.graphics.Color.rgb(100, 116, 130)
-                )
-                setPadding(0, 8, 0, 0)
-            }
+            val details =
+                TextView(this).apply {
+                    text = "${item.date}  •  ${item.time}\n${item.location}"
+                    textSize = 14f
+                    setTextColor(
+                        android.graphics.Color.rgb(100, 116, 130),
+                    )
+                    setPadding(0, 8, 0, 0)
+                }
 
             content.addView(title)
             content.addView(details)
 
             if (item.description.isNotBlank()) {
-                val description = TextView(this).apply {
-                    text = item.description
-                    textSize = 14f
-                    setTextColor(
-                        android.graphics.Color.rgb(100, 116, 130)
-                    )
-                    setPadding(0, 8, 0, 0)
-                }
+                val description =
+                    TextView(this).apply {
+                        text = item.description
+                        textSize = 14f
+                        setTextColor(
+                            android.graphics.Color.rgb(100, 116, 130),
+                        )
+                        setPadding(0, 8, 0, 0)
+                    }
                 content.addView(description)
             }
 
-            val deleteButton = MaterialButton(
-                this,
-                null,
-                com.google.android.material.R.attr.materialButtonOutlinedStyle
-            ).apply {
-                text = "Delete"
-                isAllCaps = false
-                setOnClickListener {
-                    confirmDelete(item)
+            val deleteButton =
+                MaterialButton(
+                    this,
+                    null,
+                    com.google.android.material.R.attr.materialButtonOutlinedStyle,
+                ).apply {
+                    text = "Delete"
+                    isAllCaps = false
+                    setOnClickListener {
+                        confirmDelete(item)
+                    }
                 }
-            }
 
             content.addView(deleteButton)
             card.addView(content)
@@ -362,21 +371,21 @@ class ItineraryActivity : AppCompatActivity() {
     }
 
     private fun confirmDelete(item: ItineraryItemEntity) {
-        AlertDialog.Builder(this)
+        AlertDialog
+            .Builder(this)
             .setTitle("Delete activity")
             .setMessage(
-                "Are you sure you want to delete \"${item.title}\"?"
-            )
-            .setNegativeButton("Cancel", null)
+                "Are you sure you want to delete \"${item.title}\"?",
+            ).setNegativeButton("Cancel", null)
             .setPositiveButton("Delete") { _, _ ->
                 itineraryViewModel.deleteItem(item)
 
-                Toast.makeText(
-                    this,
-                    "Activity deleted.",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
-            .show()
+                Toast
+                    .makeText(
+                        this,
+                        "Activity deleted.",
+                        Toast.LENGTH_SHORT,
+                    ).show()
+            }.show()
     }
 }

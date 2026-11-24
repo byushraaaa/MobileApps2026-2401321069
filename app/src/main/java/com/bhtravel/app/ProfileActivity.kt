@@ -11,7 +11,6 @@ import com.google.android.material.button.MaterialButtonToggleGroup
 import com.google.android.material.card.MaterialCardView
 
 class ProfileActivity : AppCompatActivity() {
-
     private lateinit var preferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +28,7 @@ class ProfileActivity : AppCompatActivity() {
         findViewById<MaterialCardView>(R.id.cardFavoriteTrips)
             .setOnClickListener {
                 startActivity(
-                    Intent(this, FavoriteTripsActivity::class.java)
+                    Intent(this, FavoriteTripsActivity::class.java),
                 )
             }
 
@@ -37,7 +36,7 @@ class ProfileActivity : AppCompatActivity() {
         findViewById<MaterialCardView>(R.id.cardWallet)
             .setOnClickListener {
                 startActivity(
-                    Intent(this, WalletActivity::class.java)
+                    Intent(this, WalletActivity::class.java),
                 )
             }
 
@@ -46,14 +45,14 @@ class ProfileActivity : AppCompatActivity() {
     }
 
     private fun setupThemeSelector() {
-
         val themeGroup =
             findViewById<MaterialButtonToggleGroup>(R.id.themeToggleGroup)
 
-        val savedTheme = preferences.getInt(
-            "app_theme",
-            AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-        )
+        val savedTheme =
+            preferences.getInt(
+                "app_theme",
+                AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
+            )
 
         when (savedTheme) {
             AppCompatDelegate.MODE_NIGHT_NO ->
@@ -70,18 +69,20 @@ class ProfileActivity : AppCompatActivity() {
 
             if (!isChecked) return@addOnButtonCheckedListener
 
-            val selectedTheme = when (checkedId) {
-                R.id.btnLightTheme ->
-                    AppCompatDelegate.MODE_NIGHT_NO
+            val selectedTheme =
+                when (checkedId) {
+                    R.id.btnLightTheme ->
+                        AppCompatDelegate.MODE_NIGHT_NO
 
-                R.id.btnDarkTheme ->
-                    AppCompatDelegate.MODE_NIGHT_YES
+                    R.id.btnDarkTheme ->
+                        AppCompatDelegate.MODE_NIGHT_YES
 
-                else ->
-                    AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
-            }
+                    else ->
+                        AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM
+                }
 
-            preferences.edit()
+            preferences
+                .edit()
                 .putInt("app_theme", selectedTheme)
                 .apply()
 

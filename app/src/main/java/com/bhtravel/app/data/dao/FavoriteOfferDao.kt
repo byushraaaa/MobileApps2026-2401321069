@@ -2,16 +2,15 @@
 package com.bhtravel.app.data.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Delete
 import com.bhtravel.app.data.entity.FavoriteOfferEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteOfferDao {
-
     @Query("SELECT * FROM favorite_offers ORDER BY destination ASC")
     fun getAllFavorites(): Flow<List<FavoriteOfferEntity>>
 

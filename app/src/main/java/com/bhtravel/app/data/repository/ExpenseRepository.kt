@@ -6,20 +6,13 @@ import com.bhtravel.app.data.entity.ExpenseEntity
 import kotlinx.coroutines.flow.Flow
 
 class ExpenseRepository(
-    private val expenseDao: ExpenseDao
+    private val expenseDao: ExpenseDao,
 ) {
+    fun getExpensesForTrip(tripId: Int): Flow<List<ExpenseEntity>> = expenseDao.getExpensesForTrip(tripId)
 
-    fun getExpensesForTrip(tripId: Int): Flow<List<ExpenseEntity>> {
-        return expenseDao.getExpensesForTrip(tripId)
-    }
+    fun getAllExpenses(): Flow<List<ExpenseEntity>> = expenseDao.getAllExpenses()
 
-    fun getAllExpenses(): Flow<List<ExpenseEntity>> {
-        return expenseDao.getAllExpenses()
-    }
-
-    fun getTotalForTrip(tripId: Int): Flow<Double?> {
-        return expenseDao.getTotalForTrip(tripId)
-    }
+    fun getTotalForTrip(tripId: Int): Flow<Double?> = expenseDao.getTotalForTrip(tripId)
 
     suspend fun insertExpense(expense: ExpenseEntity) {
         expenseDao.insertExpense(expense)

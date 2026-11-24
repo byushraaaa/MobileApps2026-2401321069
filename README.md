@@ -12,7 +12,7 @@ BHtravel е мобилно приложение за Android, предназна
 
 В секцията My Trips потребителят може да добавя нови пътувания, като въвежда дестинация, държава, начална и крайна дата, брой пътуващи и допълнителни бележки. Създадените записи могат да бъдат разглеждани, редактирани и изтривани. Информацията се съхранява локално чрез Room Database и остава налична след повторно стартиране на приложението.
 
-Секцията Explore предоставя възможност за разглеждане на дестинации, организирани в категории Beach, City, Culture и Nature & Mountains. За избрани места може да се отвори Google Maps.
+Секцията Explore предоставя възможност за разглеждане на дестинации, организирани в категории Beach, City, Culture и Nature & Mountains. За избрани места може да се отвори Google Maps. Бутонът „Open my location in Maps“ използва разрешение за местоположение и текущата GPS/мрежова позиция, за да отвори координатите в Maps.
 
 В секцията Offers потребителят може да разглежда туристически предложения и да преминава към външни платформи за полети и хотели.
 
@@ -66,21 +66,23 @@ BHtravel е мобилно приложение за Android, предназна
 
 ## 7. Скрийншотове
 
-В тази секция ще бъдат добавени изображения на основните екрани на BHtravel:
+По-долу са показани екранни снимки от приложението в светла и тъмна тема.
 
-- Home
-- My Trips
-- Explore
-- Offers
-- Wallet
-- Profile – Light Mode
-- Profile – Dark Mode
-
-Изображенията ще бъдат съхранени в директория `screenshots/` в главната директория на проекта.
+| Екран | Изображение |
+|---|---|
+| Home – Light | ![Home в светла тема](screenshots/home-light.jpg) |
+| Home – Dark | ![Home в тъмна тема](screenshots/home-dark.jpg) |
+| My Trips – Light | ![My Trips в светла тема](screenshots/my-trips-light.jpg) |
+| My Trips – Dark | ![My Trips в тъмна тема](screenshots/my-trips-dark.jpg) |
+| Explore | ![Explore с GPS бутона за Maps](screenshots/explore.jpg) |
+| Offers | ![Оферти за пътуване](screenshots/offers.jpg) |
+| Wallet | ![Бюджет и разходи в Wallet](screenshots/wallet.jpg) |
+| Profile – Light | ![Профил в светла тема](screenshots/profile-light.jpg) |
+| Favorite Trips – Dark | ![Любими пътувания в тъмна тема](screenshots/favorite-trips-dark.jpg) |
 
 ## 8. APK
 
-Готовият инсталационен файл на приложението ще бъде добавен в:
+Готовият инсталационен файл на приложението е:
 
 `apk/app-release.apk`
 

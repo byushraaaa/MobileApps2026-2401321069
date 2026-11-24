@@ -10,9 +10,8 @@ import com.bhtravel.app.data.repository.TripRepository
 import kotlinx.coroutines.launch
 
 class TripViewModel(
-    private val repository: TripRepository
+    private val repository: TripRepository,
 ) : ViewModel() {
-
     val allTrips: LiveData<List<TripEntity>> =
         repository.allTrips.asLiveData()
 

@@ -1,9 +1,7 @@
 
 package com.bhtravel.app
 
-import android.app.AlertDialog
 import android.widget.TextView
-
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -16,13 +14,13 @@ import org.robolectric.shadows.ShadowAlertDialog
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [35])
 class WalletActivityTest {
-
     @Test
     fun walletActivity_launchesSuccessfully() {
-        val activity = Robolectric
-            .buildActivity(WalletActivity::class.java)
-            .setup()
-            .get()
+        val activity =
+            Robolectric
+                .buildActivity(WalletActivity::class.java)
+                .setup()
+                .get()
 
         assertNotNull(activity)
         assertNotNull(activity.findViewById<TextView>(R.id.tvTotalBudget))
@@ -34,12 +32,14 @@ class WalletActivityTest {
 
     @Test
     fun walletActivity_backButton_finishesActivity() {
-        val activity = Robolectric
-            .buildActivity(WalletActivity::class.java)
-            .setup()
-            .get()
+        val activity =
+            Robolectric
+                .buildActivity(WalletActivity::class.java)
+                .setup()
+                .get()
 
-        activity.findViewById<TextView>(R.id.btnBackWallet)
+        activity
+            .findViewById<TextView>(R.id.btnBackWallet)
             .performClick()
 
         assertTrue(activity.isFinishing)
@@ -47,12 +47,14 @@ class WalletActivityTest {
 
     @Test
     fun walletActivity_setBudgetButton_opensDialog() {
-        val activity = Robolectric
-            .buildActivity(WalletActivity::class.java)
-            .setup()
-            .get()
+        val activity =
+            Robolectric
+                .buildActivity(WalletActivity::class.java)
+                .setup()
+                .get()
 
-        activity.findViewById<android.view.View>(R.id.btnSetBudget)
+        activity
+            .findViewById<android.view.View>(R.id.btnSetBudget)
             .performClick()
 
         val dialog = ShadowAlertDialog.getLatestAlertDialog()
@@ -63,28 +65,32 @@ class WalletActivityTest {
 
     @Test
     fun walletActivity_addExpenseButton_exists() {
-        val activity = Robolectric
-            .buildActivity(WalletActivity::class.java)
-            .setup()
-            .get()
+        val activity =
+            Robolectric
+                .buildActivity(WalletActivity::class.java)
+                .setup()
+                .get()
 
-        val button = activity.findViewById<android.view.View>(
-            R.id.btnAddExpense
-        )
+        val button =
+            activity.findViewById<android.view.View>(
+                R.id.btnAddExpense,
+            )
 
         assertNotNull(button)
     }
 
     @Test
     fun walletActivity_viewAllExpensesButton_exists() {
-        val activity = Robolectric
-            .buildActivity(WalletActivity::class.java)
-            .setup()
-            .get()
+        val activity =
+            Robolectric
+                .buildActivity(WalletActivity::class.java)
+                .setup()
+                .get()
 
-        val button = activity.findViewById<TextView>(
-            R.id.btnViewAllExpenses
-        )
+        val button =
+            activity.findViewById<TextView>(
+                R.id.btnViewAllExpenses,
+            )
 
         assertNotNull(button)
     }

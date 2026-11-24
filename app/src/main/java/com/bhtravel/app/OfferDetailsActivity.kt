@@ -14,7 +14,6 @@ import com.google.android.material.button.MaterialButton
 import kotlinx.coroutines.launch
 
 class OfferDetailsActivity : AppCompatActivity() {
-
     companion object {
         const val EXTRA_DESTINATION = "extra_destination"
         const val EXTRA_COUNTRY = "extra_country"
@@ -60,20 +59,22 @@ class OfferDetailsActivity : AppCompatActivity() {
 
         favoriteButton = findViewById(R.id.btnAddFavorite)
 
-        val imageName = try {
-            resources.getResourceEntryName(imageRes)
-        } catch (e: Exception) {
-            "travel"
-        }
+        val imageName =
+            try {
+                resources.getResourceEntryName(imageRes)
+            } catch (e: Exception) {
+                "travel"
+            }
 
-        favoriteOffer = FavoriteOfferEntity(
-            destination = destination,
-            country = country,
-            description = description,
-            duration = duration,
-            price = price,
-            imageName = imageName
-        )
+        favoriteOffer =
+            FavoriteOfferEntity(
+                destination = destination,
+                country = country,
+                description = description,
+                duration = duration,
+                price = price,
+                imageName = imageName,
+            )
 
         val dao = DatabaseProvider.getDatabase(this).favoriteOfferDao()
 
@@ -91,21 +92,22 @@ class OfferDetailsActivity : AppCompatActivity() {
                     dao.removeFavoriteByDestination(destination)
                     updateFavoriteButton(false)
 
-                    Toast.makeText(
-                        this@OfferDetailsActivity,
-                        "Removed from Favorites",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
+                    Toast
+                        .makeText(
+                            this@OfferDetailsActivity,
+                            "Removed from Favorites",
+                            Toast.LENGTH_SHORT,
+                        ).show()
                 } else {
                     dao.addFavorite(favoriteOffer)
                     updateFavoriteButton(true)
 
-                    Toast.makeText(
-                        this@OfferDetailsActivity,
-                        "Added to Favorites!",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    Toast
+                        .makeText(
+                            this@OfferDetailsActivity,
+                            "Added to Favorites!",
+                            Toast.LENGTH_SHORT,
+                        ).show()
                 }
             }
         }
@@ -113,21 +115,21 @@ class OfferDetailsActivity : AppCompatActivity() {
         // Open New Trip form with destination and country pre-filled.
         findViewById<MaterialButton>(R.id.btnAddToTrips)
             .setOnClickListener {
+                val tripIntent =
+                    Intent(
+                        this,
+                        NewTripActivity::class.java,
+                    ).apply {
+                        putExtra(
+                            NewTripActivity.EXTRA_DESTINATION,
+                            destination,
+                        )
 
-                val tripIntent = Intent(
-                    this,
-                    NewTripActivity::class.java
-                ).apply {
-                    putExtra(
-                        NewTripActivity.EXTRA_DESTINATION,
-                        destination
-                    )
-
-                    putExtra(
-                        NewTripActivity.EXTRA_COUNTRY,
-                        country
-                    )
-                }
+                        putExtra(
+                            NewTripActivity.EXTRA_COUNTRY,
+                            country,
+                        )
+                    }
 
                 startActivity(tripIntent)
             }

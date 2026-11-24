@@ -4,6 +4,7 @@ import org.gradle.testing.jacoco.tasks.JacocoReport
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.ktlint)
     id("jacoco")
 }
 
@@ -33,11 +34,12 @@ android {
         release {
             optimization {
                 enable = true
-                packageScope = setOf(
-                    "androidx.**",
-                    "kotlin.**",
-                    "kotlinx.**"
-                )
+                packageScope =
+                    setOf(
+                        "androidx.**",
+                        "kotlin.**",
+                        "kotlinx.**",
+                    )
             }
             testOptions {
                 unitTests {
@@ -93,80 +95,92 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         html.required.set(true)
     }
 
-    val fileFilter = listOf(
-        "**/R.class",
-        "**/R$*.class",
-        "**/BuildConfig.*",
-        "**/Manifest*.*",
-        "**/*Test*.*"
-    )
+    val fileFilter =
+        listOf(
+            "**/R.class",
+            "**/R$*.class",
+            "**/BuildConfig.*",
+            "**/Manifest*.*",
+            "**/*Test*.*",
+        )
 
     // Measure core logic, data models, and the tested Wallet/Profile flows.
     // Other screens and Room-generated persistence code are outside this metric.
-    val businessLogicTree = fileTree(
-        layout.buildDirectory.dir("intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes")
-    ) {
-        include(
-            "**/BudgetValidator*.class",
-            "**/TripValidator*.class",
-            "**/data/entity/*.class",
-            "**/data/repository/*.class",
-            "**/viewmodel/*ViewModel.class",
-            "**/WalletActivity.class",
-            "**/ProfileActivity.class"
-        )
-        exclude(fileFilter)
-    }
+    val businessLogicTree =
+        fileTree(
+            layout.buildDirectory.dir("intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes"),
+        ) {
+            include(
+                "**/BudgetValidator*.class",
+                "**/TripValidator*.class",
+                "**/MapLocationUri*.class",
+                "**/data/entity/*.class",
+                "**/data/repository/*.class",
+                "**/viewmodel/*ViewModel.class",
+                "**/WalletActivity.class",
+                "**/ProfileActivity.class",
+            )
+            exclude(fileFilter)
+        }
 
     classDirectories.setFrom(businessLogicTree)
 
     sourceDirectories.setFrom(
         files(
             "src/main/java",
-            "src/main/kotlin"
-        )
+            "src/main/kotlin",
+        ),
     )
 
     executionData.setFrom(
         layout.buildDirectory.file(
-            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
-        )
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+        ),
     )
 }
 
 tasks.register<JacocoCoverageVerification>("jacocoCoverageVerification") {
     dependsOn("testDebugUnitTest")
 
-    val businessLogicTree = fileTree(
-        layout.buildDirectory.dir("intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes")
-    ) {
-        include(
-            "**/BudgetValidator*.class",
-            "**/TripValidator*.class",
-            "**/data/entity/*.class",
-            "**/data/repository/*.class",
-            "**/viewmodel/*ViewModel.class",
-            "**/WalletActivity.class",
-            "**/ProfileActivity.class"
-        )
-        exclude(
-            "**/R.class",
-            "**/R$*.class",
-            "**/BuildConfig.*",
-            "**/Manifest*.*",
-            "**/*Test*.*"
-        )
-    }
+    val businessLogicTree =
+        fileTree(
+            layout.buildDirectory.dir("intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes"),
+        ) {
+            include(
+                "**/BudgetValidator*.class",
+                "**/TripValidator*.class",
+                "**/MapLocationUri*.class",
+                "**/data/entity/*.class",
+                "**/data/repository/*.class",
+                "**/viewmodel/*ViewModel.class",
+                "**/WalletActivity.class",
+                "**/ProfileActivity.class",
+            )
+            exclude(
+                "**/R.class",
+                "**/R$*.class",
+                "**/BuildConfig.*",
+                "**/Manifest*.*",
+                "**/*Test*.*",
+            )
+        }
 
     classDirectories.setFrom(businessLogicTree)
     sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
     executionData.setFrom(
         layout.buildDirectory.file(
-            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
-        )
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+        ),
     )
 
     violationRules {
+        rule {
+            limit {
+                counter = "INSTRUCTION"
+                value = "COVEREDRATIO"
+                minimum = "0.15".toBigDecimal()
+            }
+        }
         rule {
             limit {
                 counter = "BRANCH"

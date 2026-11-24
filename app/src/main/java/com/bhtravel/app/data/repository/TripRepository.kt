@@ -6,15 +6,12 @@ import com.bhtravel.app.data.entity.TripEntity
 import kotlinx.coroutines.flow.Flow
 
 class TripRepository(
-    private val tripDao: TripDao
+    private val tripDao: TripDao,
 ) {
-
     val allTrips: Flow<List<TripEntity>> =
         tripDao.getAllTrips()
 
-    suspend fun getTripById(tripId: Int): TripEntity? {
-        return tripDao.getTripById(tripId)
-    }
+    suspend fun getTripById(tripId: Int): TripEntity? = tripDao.getTripById(tripId)
 
     suspend fun insertTrip(trip: TripEntity) {
         tripDao.insertTrip(trip)

@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ExpenseDao {
-
     @Query("SELECT * FROM expenses WHERE tripId = :tripId ORDER BY id DESC")
     fun getExpensesForTrip(tripId: Int): Flow<List<ExpenseEntity>>
 

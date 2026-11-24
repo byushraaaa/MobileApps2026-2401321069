@@ -12,13 +12,13 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class TripViewModelTest {
-
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
@@ -30,17 +30,17 @@ class TripViewModelTest {
 
         override fun getAllTrips(): Flow<List<TripEntity>> = trips
 
-        override suspend fun getTripById(tripId: Int): TripEntity? =
-            trips.value.find { it.id == tripId }
+        override suspend fun getTripById(tripId: Int): TripEntity? = trips.value.find { it.id == tripId }
 
         override suspend fun insertTrip(trip: TripEntity) {
             trips.value = trips.value + trip
         }
 
         override suspend fun updateTrip(trip: TripEntity) {
-            trips.value = trips.value.map {
-                if (it.id == trip.id) trip else it
-            }
+            trips.value =
+                trips.value.map {
+                    if (it.id == trip.id) trip else it
+                }
         }
 
         override suspend fun deleteTrip(trip: TripEntity) {
@@ -50,7 +50,7 @@ class TripViewModelTest {
 
     private fun createTrip(
         id: Int = 1,
-        destination: String = "Paris"
+        destination: String = "Paris",
     ) = TripEntity(
         id = id,
         destination = destination,
@@ -58,72 +58,86 @@ class TripViewModelTest {
         startDate = "2026-12-10",
         endDate = "2026-12-15",
         travelers = 2,
-        notes = "Test trip"
+        notes = "Test trip",
     )
 
     @Test
-    fun allTrips_emitsTripsFromRepository() = runTest {
-        val dao = FakeTripDao()
-        dao.trips.value = listOf(createTrip())
+    fun allTrips_emitsTripsFromRepository() =
+        runTest {
+            val dao = FakeTripDao()
+            dao.trips.value = listOf(createTrip())
 
-        val viewModel = TripViewModel(TripRepository(dao))
-        val observer = Observer<List<TripEntity>> {}
+            val viewModel = TripViewModel(TripRepository(dao))
+            val observer = Observer<List<TripEntity>> {}
 
-        viewModel.allTrips.observeForever(observer)
-        advanceUntilIdle()
+            viewModel.allTrips.observeForever(observer)
+            advanceUntilIdle()
 
-        assertEquals(1, viewModel.allTrips.value?.size)
-        assertEquals("Paris", viewModel.allTrips.value?.first()?.destination)
+            assertEquals(1, viewModel.allTrips.value?.size)
+            assertEquals(
+                "Paris",
+                viewModel.allTrips.value
+                    ?.first()
+                    ?.destination,
+            )
 
-        viewModel.allTrips.removeObserver(observer)
-    }
-
-    @Test
-    fun insertTrip_addsTrip() = runTest {
-        val dao = FakeTripDao()
-        val viewModel = TripViewModel(TripRepository(dao))
-        val observer = Observer<List<TripEntity>> {}
-
-        viewModel.allTrips.observeForever(observer)
-        viewModel.insertTrip(createTrip())
-        advanceUntilIdle()
-
-        assertEquals(1, viewModel.allTrips.value?.size)
-
-        viewModel.allTrips.removeObserver(observer)
-    }
+            viewModel.allTrips.removeObserver(observer)
+        }
 
     @Test
-    fun updateTrip_changesTrip() = runTest {
-        val dao = FakeTripDao()
-        dao.trips.value = listOf(createTrip())
+    fun insertTrip_addsTrip() =
+        runTest {
+            val dao = FakeTripDao()
+            val viewModel = TripViewModel(TripRepository(dao))
+            val observer = Observer<List<TripEntity>> {}
 
-        val viewModel = TripViewModel(TripRepository(dao))
-        val observer = Observer<List<TripEntity>> {}
+            viewModel.allTrips.observeForever(observer)
+            viewModel.insertTrip(createTrip())
+            advanceUntilIdle()
 
-        viewModel.allTrips.observeForever(observer)
-        viewModel.updateTrip(createTrip(destination = "Rome"))
-        advanceUntilIdle()
+            assertEquals(1, viewModel.allTrips.value?.size)
 
-        assertEquals("Rome", viewModel.allTrips.value?.first()?.destination)
-
-        viewModel.allTrips.removeObserver(observer)
-    }
+            viewModel.allTrips.removeObserver(observer)
+        }
 
     @Test
-    fun deleteTrip_removesTrip() = runTest {
-        val dao = FakeTripDao()
-        dao.trips.value = listOf(createTrip())
+    fun updateTrip_changesTrip() =
+        runTest {
+            val dao = FakeTripDao()
+            dao.trips.value = listOf(createTrip())
 
-        val viewModel = TripViewModel(TripRepository(dao))
-        val observer = Observer<List<TripEntity>> {}
+            val viewModel = TripViewModel(TripRepository(dao))
+            val observer = Observer<List<TripEntity>> {}
 
-        viewModel.allTrips.observeForever(observer)
-        viewModel.deleteTrip(createTrip())
-        advanceUntilIdle()
+            viewModel.allTrips.observeForever(observer)
+            viewModel.updateTrip(createTrip(destination = "Rome"))
+            advanceUntilIdle()
 
-        assertTrue(viewModel.allTrips.value.isNullOrEmpty())
+            assertEquals(
+                "Rome",
+                viewModel.allTrips.value
+                    ?.first()
+                    ?.destination,
+            )
 
-        viewModel.allTrips.removeObserver(observer)
-    }
+            viewModel.allTrips.removeObserver(observer)
+        }
+
+    @Test
+    fun deleteTrip_removesTrip() =
+        runTest {
+            val dao = FakeTripDao()
+            dao.trips.value = listOf(createTrip())
+
+            val viewModel = TripViewModel(TripRepository(dao))
+            val observer = Observer<List<TripEntity>> {}
+
+            viewModel.allTrips.observeForever(observer)
+            viewModel.deleteTrip(createTrip())
+            advanceUntilIdle()
+
+            assertTrue(viewModel.allTrips.value.isNullOrEmpty())
+
+            viewModel.allTrips.removeObserver(observer)
+        }
 }

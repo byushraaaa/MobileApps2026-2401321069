@@ -6,9 +6,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.bhtravel.app.data.repository.ExpenseRepository
 
 class ExpenseViewModelFactory(
-    private val repository: ExpenseRepository
+    private val repository: ExpenseRepository,
 ) : ViewModelProvider.Factory {
-
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(ExpenseViewModel::class.java)) {

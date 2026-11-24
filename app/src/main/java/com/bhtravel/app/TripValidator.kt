@@ -7,19 +7,17 @@ enum class TripValidationError {
     START_DATE_REQUIRED,
     END_DATE_REQUIRED,
     INVALID_DATE_RANGE,
-    INVALID_TRAVELERS
+    INVALID_TRAVELERS,
 }
 
 object TripValidator {
-
     fun validate(
         destination: String,
         country: String,
         startDateMillis: Long?,
         endDateMillis: Long?,
-        travelersText: String
+        travelersText: String,
     ): TripValidationError? {
-
         if (destination.isBlank()) {
             return TripValidationError.DESTINATION_REQUIRED
         }
@@ -47,7 +45,5 @@ object TripValidator {
         }
 
         return null
-
     }
-
 }

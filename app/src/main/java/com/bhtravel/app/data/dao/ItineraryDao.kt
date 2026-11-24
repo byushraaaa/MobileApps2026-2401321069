@@ -11,12 +11,13 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItineraryDao {
-
-    @Query("""
+    @Query(
+        """
         SELECT * FROM itinerary_items
         WHERE tripId = :tripId
         ORDER BY date ASC, time ASC
-    """)
+    """,
+    )
     fun getItemsForTrip(tripId: Int): Flow<List<ItineraryItemEntity>>
 
     @Insert

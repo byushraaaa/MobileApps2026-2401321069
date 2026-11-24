@@ -28,7 +28,6 @@ import java.util.Date
 import java.util.Locale
 
 class TripsActivity : AppCompatActivity() {
-
     private lateinit var tripsContainer: LinearLayout
     private lateinit var tvEmptyState: TextView
     private lateinit var tripViewModel: TripViewModel
@@ -89,66 +88,69 @@ class TripsActivity : AppCompatActivity() {
     private suspend fun addDemoTripsIfMissing() {
         val existingTrips = repository.allTrips.first()
 
-        val existingDestinations = existingTrips.map {
-            it.destination.lowercase(Locale.ROOT)
-        }.toSet()
+        val existingDestinations =
+            existingTrips
+                .map {
+                    it.destination.lowercase(Locale.ROOT)
+                }.toSet()
 
-        val demoTrips = listOf(
-            TripEntity(
-                destination = "Milan",
-                country = "Italy",
-                startDate = "06 Dec 2026",
-                endDate = "09 Dec 2026",
-                travelers = 2,
-                notes = "",
-                imageUrl = "milano"
-            ),
-            TripEntity(
-                destination = "Vienna",
-                country = "Austria",
-                startDate = "31 Dec 2026",
-                endDate = "02 Jan 2027",
-                travelers = 2,
-                notes = "",
-                imageUrl = "vienna"
-            ),
-            TripEntity(
-                destination = "Amsterdam",
-                country = "Netherlands",
-                startDate = "12 Feb 2027",
-                endDate = "15 Feb 2027",
-                travelers = 2,
-                notes = "",
-                imageUrl = "amsterdam"
-            ),
-            TripEntity(
-                destination = "Istanbul",
-                country = "Turkey",
-                startDate = "15 Aug 2026",
-                endDate = "18 Aug 2026",
-                travelers = 2,
-                notes = "",
-                imageUrl = "istanbul"
-            ),
-            TripEntity(
-                destination = "Tromsø",
-                country = "Norway",
-                startDate = "10 Jul 2026",
-                endDate = "12 Jul 2026",
-                travelers = 2,
-                notes = "",
-                imageUrl = "tromso"
-            ),
-            TripEntity(
-                destination = "Sofia",
-                country = "Bulgaria",
-                startDate = "20 May 2026",
-                endDate = "22 May 2026",
-                travelers = 2,
-                notes = "",
-                imageUrl = "sofia"
+        val demoTrips =
+            listOf(
+                TripEntity(
+                    destination = "Milan",
+                    country = "Italy",
+                    startDate = "06 Dec 2026",
+                    endDate = "09 Dec 2026",
+                    travelers = 2,
+                    notes = "",
+                    imageUrl = "milano",
+                ),
+                TripEntity(
+                    destination = "Vienna",
+                    country = "Austria",
+                    startDate = "31 Dec 2026",
+                    endDate = "02 Jan 2027",
+                    travelers = 2,
+                    notes = "",
+                    imageUrl = "vienna",
+                ),
+                TripEntity(
+                    destination = "Amsterdam",
+                    country = "Netherlands",
+                    startDate = "12 Feb 2027",
+                    endDate = "15 Feb 2027",
+                    travelers = 2,
+                    notes = "",
+                    imageUrl = "amsterdam",
+                ),
+                TripEntity(
+                    destination = "Istanbul",
+                    country = "Turkey",
+                    startDate = "15 Aug 2026",
+                    endDate = "18 Aug 2026",
+                    travelers = 2,
+                    notes = "",
+                    imageUrl = "istanbul",
+                ),
+                TripEntity(
+                    destination = "Tromsø",
+                    country = "Norway",
+                    startDate = "10 Jul 2026",
+                    endDate = "12 Jul 2026",
+                    travelers = 2,
+                    notes = "",
+                    imageUrl = "tromso",
+                ),
+                TripEntity(
+                    destination = "Sofia",
+                    country = "Bulgaria",
+                    startDate = "20 May 2026",
+                    endDate = "22 May 2026",
+                    travelers = 2,
+                    notes = "",
+                    imageUrl = "sofia",
+                ),
             )
-        )
 
         demoTrips.forEach { trip ->
             if (
@@ -172,21 +174,21 @@ class TripsActivity : AppCompatActivity() {
 
         val today = Date()
 
-        val upcomingTrips = trips
-            .filter {
-                parseDate(it.startDate)?.let { date ->
-                    !date.before(today)
-                } ?: false
-            }
-            .sortedBy { parseDate(it.startDate) }
+        val upcomingTrips =
+            trips
+                .filter {
+                    parseDate(it.startDate)?.let { date ->
+                        !date.before(today)
+                    } ?: false
+                }.sortedBy { parseDate(it.startDate) }
 
-        val pastTrips = trips
-            .filter {
-                parseDate(it.startDate)?.let { date ->
-                    date.before(today)
-                } ?: true
-            }
-            .sortedByDescending { parseDate(it.startDate) }
+        val pastTrips =
+            trips
+                .filter {
+                    parseDate(it.startDate)?.let { date ->
+                        date.before(today)
+                    } ?: true
+                }.sortedByDescending { parseDate(it.startDate) }
 
         if (upcomingTrips.isNotEmpty()) {
             addSectionTitle("Upcoming Trips (${upcomingTrips.size})")
@@ -207,160 +209,176 @@ class TripsActivity : AppCompatActivity() {
 
     // Section titles now use the active theme text color
     private fun addSectionTitle(title: String) {
-        val textView = TextView(this).apply {
-            text = title
-            textSize = 21f
-            setTextColor(appText)
-            setPadding(dp(4), dp(22), dp(4), dp(10))
-            typeface = android.graphics.Typeface.DEFAULT_BOLD
-        }
+        val textView =
+            TextView(this).apply {
+                text = title
+                textSize = 21f
+                setTextColor(appText)
+                setPadding(dp(4), dp(22), dp(4), dp(10))
+                typeface = android.graphics.Typeface.DEFAULT_BOLD
+            }
 
         tripsContainer.addView(textView)
     }
 
     private fun createTripCard(trip: TripEntity): View {
+        val card =
+            MaterialCardView(this).apply {
+                radius = dp(22).toFloat()
+                cardElevation = dp(4).toFloat()
+                strokeWidth = dp(1)
+                strokeColor = appDivider
+                setCardBackgroundColor(appCard)
+                useCompatPadding = true
 
-        val card = MaterialCardView(this).apply {
-            radius = dp(22).toFloat()
-            cardElevation = dp(4).toFloat()
-            strokeWidth = dp(1)
-            strokeColor = appDivider
-            setCardBackgroundColor(appCard)
-            useCompatPadding = true
-
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            ).apply {
-                setMargins(0, dp(7), 0, dp(15))
+                layoutParams =
+                    LinearLayout
+                        .LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT,
+                        ).apply {
+                            setMargins(0, dp(7), 0, dp(15))
+                        }
             }
-        }
 
-        val mainLayout = LinearLayout(this).apply {
-            orientation = LinearLayout.VERTICAL
-            setPadding(dp(12), dp(12), dp(12), dp(12))
-        }
+        val mainLayout =
+            LinearLayout(this).apply {
+                orientation = LinearLayout.VERTICAL
+                setPadding(dp(12), dp(12), dp(12), dp(12))
+            }
 
         // Destination image
-        val image = ImageView(this).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                dp(175)
-            )
+        val image =
+            ImageView(this).apply {
+                layoutParams =
+                    LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        dp(175),
+                    )
 
-            scaleType = ImageView.ScaleType.CENTER_CROP
+                scaleType = ImageView.ScaleType.CENTER_CROP
 
-            val imageName = trip.imageUrl
-                ?.takeIf { it.isNotBlank() }
-                ?: getDestinationImage(trip.destination)
+                val imageName =
+                    trip.imageUrl
+                        ?.takeIf { it.isNotBlank() }
+                        ?: getDestinationImage(trip.destination)
 
-            val imageId = resources.getIdentifier(
-                imageName,
-                "drawable",
-                packageName
-            )
+                val imageId =
+                    resources.getIdentifier(
+                        imageName,
+                        "drawable",
+                        packageName,
+                    )
 
-            setImageResource(
-                if (imageId != 0) imageId else R.drawable.travel
-            )
-        }
+                setImageResource(
+                    if (imageId != 0) imageId else R.drawable.travel,
+                )
+            }
 
         mainLayout.addView(image)
 
         // Destination title
-        val destination = TextView(this).apply {
-            text = "${trip.destination}, ${trip.country}"
-            textSize = 20f
-            typeface = android.graphics.Typeface.DEFAULT_BOLD
-            setTextColor(appText)
-            setPadding(0, dp(13), 0, dp(6))
-        }
+        val destination =
+            TextView(this).apply {
+                text = "${trip.destination}, ${trip.country}"
+                textSize = 20f
+                typeface = android.graphics.Typeface.DEFAULT_BOLD
+                setTextColor(appText)
+                setPadding(0, dp(13), 0, dp(6))
+            }
 
         mainLayout.addView(destination)
 
         // Dates
         mainLayout.addView(
             createDetailText(
-                "📅  ${trip.startDate} – ${trip.endDate}"
-            )
+                "📅  ${trip.startDate} – ${trip.endDate}",
+            ),
         )
 
         // Travelers
         mainLayout.addView(
             createDetailText(
-                "👥  ${trip.travelers} travelers"
-            )
+                "👥  ${trip.travelers} travelers",
+            ),
         )
 
         // Notes
         if (trip.notes.isNotBlank()) {
             mainLayout.addView(
-                createDetailText("📝  ${trip.notes}")
+                createDetailText("📝  ${trip.notes}"),
             )
         }
 
         // Divider
-        val divider = View(this).apply {
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                dp(1)
-            ).apply {
-                topMargin = dp(12)
-                bottomMargin = dp(12)
-            }
+        val divider =
+            View(this).apply {
+                layoutParams =
+                    LinearLayout
+                        .LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            dp(1),
+                        ).apply {
+                            topMargin = dp(12)
+                            bottomMargin = dp(12)
+                        }
 
-            setBackgroundColor(appDivider)
-        }
+                setBackgroundColor(appDivider)
+            }
 
         mainLayout.addView(divider)
 
         // Action buttons
-        val buttons = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            gravity = Gravity.CENTER
-        }
+        val buttons =
+            LinearLayout(this).apply {
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER
+            }
 
-        val editButton = createActionButton(
-            "✎  Edit",
-            appSelected,
-            appText
-        ) {
-            openEditTrip(trip)
-        }
+        val editButton =
+            createActionButton(
+                "✎  Edit",
+                appSelected,
+                appText,
+            ) {
+                openEditTrip(trip)
+            }
 
-        val deleteButton = createActionButton(
-            "▤  Delete",
-            appUnselected,
-            appText
-        ) {
-            showDeleteConfirmation(trip)
-        }
+        val deleteButton =
+            createActionButton(
+                "▤  Delete",
+                appUnselected,
+                appText,
+            ) {
+                showDeleteConfirmation(trip)
+            }
 
-        val mapsButton = createActionButton(
-            "⌖  Maps",
-            appSelected,
-            appText
-        ) {
-            openInMaps(trip)
-        }
+        val mapsButton =
+            createActionButton(
+                "⌖  Maps",
+                appSelected,
+                appText,
+            ) {
+                openInMaps(trip)
+            }
 
         buttons.addView(
             editButton,
             LinearLayout.LayoutParams(0, dp(46), 1f).apply {
                 marginEnd = dp(5)
-            }
+            },
         )
 
         buttons.addView(
             deleteButton,
             LinearLayout.LayoutParams(0, dp(46), 1f).apply {
                 marginEnd = dp(5)
-            }
+            },
         )
 
         buttons.addView(
             mapsButton,
-            LinearLayout.LayoutParams(0, dp(46), 1f)
+            LinearLayout.LayoutParams(0, dp(46), 1f),
         )
 
         mainLayout.addView(buttons)
@@ -370,9 +388,8 @@ class TripsActivity : AppCompatActivity() {
         return card
     }
 
-    private fun getDestinationImage(destination: String): String {
-        return when (destination.trim().lowercase(Locale.ROOT)) {
-
+    private fun getDestinationImage(destination: String): String =
+        when (destination.trim().lowercase(Locale.ROOT)) {
             "plovdiv", "пловдив" -> "plovdiv"
             "dubai", "дубай" -> "dubai"
             "tokyo", "токио" -> "tokyo"
@@ -399,22 +416,21 @@ class TripsActivity : AppCompatActivity() {
 
             else -> "travel"
         }
-    }
 
     private fun createActionButton(
         label: String,
         backgroundColor: Int,
         textColor: Int,
-        action: () -> Unit
-    ): Button {
-        return Button(this).apply {
+        action: () -> Unit,
+    ): Button =
+        Button(this).apply {
             text = label
             textSize = 12f
             isAllCaps = false
             setTextColor(textColor)
 
             setBackgroundTintList(
-                ColorStateList.valueOf(backgroundColor)
+                ColorStateList.valueOf(backgroundColor),
             )
 
             minWidth = 0
@@ -425,16 +441,14 @@ class TripsActivity : AppCompatActivity() {
                 action()
             }
         }
-    }
 
-    private fun createDetailText(value: String): TextView {
-        return TextView(this).apply {
+    private fun createDetailText(value: String): TextView =
+        TextView(this).apply {
             text = value
             textSize = 14f
             setTextColor(appSecondaryText)
             setPadding(0, dp(5), 0, dp(5))
         }
-    }
 
     private fun openEditTrip(trip: TripEntity) {
         val intent = Intent(this, NewTripActivity::class.java)
@@ -443,39 +457,36 @@ class TripsActivity : AppCompatActivity() {
     }
 
     private fun showDeleteConfirmation(trip: TripEntity) {
-        AlertDialog.Builder(this)
+        AlertDialog
+            .Builder(this)
             .setTitle("Delete Trip")
             .setMessage(
-                "Are you sure you want to delete ${trip.destination}?"
-            )
-            .setPositiveButton("Delete") { _, _ ->
+                "Are you sure you want to delete ${trip.destination}?",
+            ).setPositiveButton("Delete") { _, _ ->
                 tripViewModel.deleteTrip(trip)
-            }
-            .setNegativeButton("Cancel", null)
+            }.setNegativeButton("Cancel", null)
             .show()
     }
 
     private fun openInMaps(trip: TripEntity) {
         val location = "${trip.destination}, ${trip.country}"
 
-        val uri = Uri.parse(
-            "https://www.google.com/maps/search/?api=1&query=" +
-                    Uri.encode(location)
-        )
+        val uri =
+            Uri.parse(
+                "https://www.google.com/maps/search/?api=1&query=" +
+                    Uri.encode(location),
+            )
 
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
 
-    private fun parseDate(date: String): Date? {
-        return try {
+    private fun parseDate(date: String): Date? =
+        try {
             dateFormat.parse(date)
         } catch (e: Exception) {
             null
         }
-    }
 
-    private fun dp(value: Int): Int {
-        return (value * resources.displayMetrics.density).toInt()
-    }
+    private fun dp(value: Int): Int = (value * resources.displayMetrics.density).toInt()
 }
