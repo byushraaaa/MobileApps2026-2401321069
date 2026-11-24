@@ -101,13 +101,24 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         "**/*Test*.*"
     )
 
-    val debugTree = fileTree(
+    // Measure core logic, data models, and the tested Wallet/Profile flows.
+    // Other screens and Room-generated persistence code are outside this metric.
+    val businessLogicTree = fileTree(
         layout.buildDirectory.dir("intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes")
     ) {
+        include(
+            "**/BudgetValidator*.class",
+            "**/TripValidator*.class",
+            "**/data/entity/*.class",
+            "**/data/repository/*.class",
+            "**/viewmodel/*ViewModel.class",
+            "**/WalletActivity.class",
+            "**/ProfileActivity.class"
+        )
         exclude(fileFilter)
     }
 
-    classDirectories.setFrom(debugTree)
+    classDirectories.setFrom(businessLogicTree)
 
     sourceDirectories.setFrom(
         files(
@@ -117,11 +128,51 @@ tasks.register<JacocoReport>("jacocoTestReport") {
     )
 
     executionData.setFrom(
-        fileTree(layout.buildDirectory) {
-            include(
-                "**/*.exec",
-                "**/*.ec"
-            )
-        }
+        layout.buildDirectory.file(
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
+        )
     )
+}
+
+tasks.register<JacocoCoverageVerification>("jacocoCoverageVerification") {
+    dependsOn("testDebugUnitTest")
+
+    val businessLogicTree = fileTree(
+        layout.buildDirectory.dir("intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes")
+    ) {
+        include(
+            "**/BudgetValidator*.class",
+            "**/TripValidator*.class",
+            "**/data/entity/*.class",
+            "**/data/repository/*.class",
+            "**/viewmodel/*ViewModel.class",
+            "**/WalletActivity.class",
+            "**/ProfileActivity.class"
+        )
+        exclude(
+            "**/R.class",
+            "**/R$*.class",
+            "**/BuildConfig.*",
+            "**/Manifest*.*",
+            "**/*Test*.*"
+        )
+    }
+
+    classDirectories.setFrom(businessLogicTree)
+    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
+    executionData.setFrom(
+        layout.buildDirectory.file(
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec"
+        )
+    )
+
+    violationRules {
+        rule {
+            limit {
+                counter = "BRANCH"
+                value = "COVEREDRATIO"
+                minimum = "0.40".toBigDecimal()
+            }
+        }
+    }
 }

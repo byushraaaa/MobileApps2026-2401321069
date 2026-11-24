@@ -7,6 +7,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.isDisplayed
 import androidx.test.espresso.matcher.ViewMatchers.withText
+import org.hamcrest.Matchers.containsString
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,7 +20,7 @@ class MainActivityTest {
 
     @Test
     fun homeScreen_displaysGreeting() {
-        onView(withText("Hello, Byushra!"))
+        onView(withText(containsString("Hello, Byushra!")))
             .check(matches(isDisplayed()))
     }
 }

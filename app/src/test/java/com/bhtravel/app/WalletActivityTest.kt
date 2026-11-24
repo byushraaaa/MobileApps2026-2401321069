@@ -1,6 +1,7 @@
 
 package com.bhtravel.app
 
+import android.app.AlertDialog
 import android.widget.TextView
 
 import org.junit.Assert.assertNotNull
