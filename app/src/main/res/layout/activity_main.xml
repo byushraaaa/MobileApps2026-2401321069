@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/cream">
+    android:background="@color/app_background">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="BHtravel"
-                    android:textColor="@color/navy"
+                    android:textColor="@color/app_text"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
@@ -39,17 +39,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="☁   ✈"
-                    android:textColor="@color/navy"
+                    android:textColor="@color/app_text"
                     android:textSize="25sp" />
             </LinearLayout>
-
 
             <!-- WELCOME SECTION -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_marginTop="22dp"
-                app:cardBackgroundColor="#C6D7EA"
+                app:cardBackgroundColor="@color/app_selected"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="0dp"
                 app:strokeWidth="0dp">
@@ -62,7 +61,6 @@
                     android:paddingStart="18dp"
                     android:paddingEnd="10dp">
 
-                    <!-- Greeting -->
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -74,7 +72,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Hello, Byushra! 👋"
-                            android:textColor="@color/navy"
+                            android:textColor="@color/app_text"
                             android:textSize="23sp"
                             android:textStyle="bold" />
 
@@ -84,7 +82,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:text="Where would you like to go next?"
-                            android:textColor="#42678F"
+                            android:textColor="@color/app_secondary_text"
                             android:textSize="13sp" />
 
                     </LinearLayout>
@@ -100,7 +98,7 @@
                             android:layout_alignParentTop="true"
                             android:layout_centerHorizontal="true"
                             android:text="☁"
-                            android:textColor="#FFFFFF"
+                            android:textColor="@color/app_card"
                             android:textSize="65sp" />
 
                         <TextView
@@ -110,7 +108,7 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginBottom="12dp"
                             android:text="✈"
-                            android:textColor="@color/navy"
+                            android:textColor="@color/app_text"
                             android:textSize="65sp" />
 
                     </RelativeLayout>
@@ -185,12 +183,12 @@
                 android:layout_marginTop="16dp"
                 android:text="+  Create a New Trip"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/app_on_primary"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:backgroundTint="@color/navy"
+                app:backgroundTint="@color/app_primary"
                 app:cornerRadius="16dp"
-                app:iconTint="@color/white" />
+                app:iconTint="@color/app_on_primary" />
 
             <!-- TRAVEL SHORTCUTS -->
             <TextView
@@ -198,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:text="Your travel shortcuts"
-                android:textColor="@color/navy"
+                android:textColor="@color/app_text"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -213,7 +211,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginEnd="5dp"
-                    app:cardBackgroundColor="@color/light_blue"
+                    app:cardBackgroundColor="@color/app_input_background"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -223,7 +221,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="✈&#10;Find Flights"
-                        android:textColor="@color/navy"
+                        android:textColor="@color/app_text"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:clickable="true"
@@ -235,7 +233,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="5dp"
-                    app:cardBackgroundColor="@color/light_blue"
+                    app:cardBackgroundColor="@color/app_input_background"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -245,7 +243,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="▱&#10;Book Hotels"
-                        android:textColor="@color/navy"
+                        android:textColor="@color/app_text"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:clickable="true"
@@ -257,7 +255,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:layout_marginStart="5dp"
-                    app:cardBackgroundColor="@color/light_blue"
+                    app:cardBackgroundColor="@color/app_input_background"
                     app:cardCornerRadius="16dp"
                     app:cardElevation="0dp">
 
@@ -267,7 +265,7 @@
                         android:layout_height="match_parent"
                         android:gravity="center"
                         android:text="🚗&#10;Rent a Car"
-                        android:textColor="@color/navy"
+                        android:textColor="@color/app_text"
                         android:textSize="15sp"
                         android:textStyle="bold"
                         android:clickable="true"
@@ -289,7 +287,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Upcoming trips"
-                    android:textColor="@color/navy"
+                    android:textColor="@color/app_text"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -297,7 +295,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="See all  ›"
-                    android:textColor="@color/navy"
+                    android:textColor="@color/app_text"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -306,7 +304,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
                 android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/light_blue"
+                app:cardBackgroundColor="@color/app_input_background"
                 app:cardCornerRadius="17dp"
                 app:cardElevation="0dp">
 
@@ -336,7 +334,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="🇮🇹  Milan, Italy"
-                            android:textColor="@color/navy"
+                            android:textColor="@color/app_text"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -345,7 +343,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="7dp"
                             android:text="6 – 9 December 2026"
-                            android:textColor="#526982"
+                            android:textColor="@color/app_secondary_text"
                             android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -356,7 +354,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="104dp"
                 android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/light_blue"
+                app:cardBackgroundColor="@color/app_input_background"
                 app:cardCornerRadius="17dp"
                 app:cardElevation="0dp">
 
@@ -386,7 +384,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="🇦🇹  Vienna, Austria"
-                            android:textColor="@color/navy"
+                            android:textColor="@color/app_text"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -395,7 +393,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="7dp"
                             android:text="31 December 2026 – 2 January 2027"
-                            android:textColor="#526982"
+                            android:textColor="@color/app_secondary_text"
                             android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -407,7 +405,7 @@
                 android:layout_height="104dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="18dp"
-                app:cardBackgroundColor="@color/light_blue"
+                app:cardBackgroundColor="@color/app_input_background"
                 app:cardCornerRadius="17dp"
                 app:cardElevation="0dp">
 
@@ -437,7 +435,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="🇳🇱  Amsterdam, Netherlands"
-                            android:textColor="@color/navy"
+                            android:textColor="@color/app_text"
                             android:textSize="16sp"
                             android:textStyle="bold" />
 
@@ -446,7 +444,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="7dp"
                             android:text="12 – 15 February 2027"
-                            android:textColor="#526982"
+                            android:textColor="@color/app_secondary_text"
                             android:textSize="13sp" />
                     </LinearLayout>
                 </LinearLayout>
@@ -460,7 +458,7 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="66dp"
-        android:background="@color/white"
+        android:background="@color/app_card"
         android:gravity="center"
         android:orientation="horizontal"
         android:elevation="8dp">
@@ -472,7 +470,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="⌂&#10;Home"
-            android:textColor="@color/navy"
+            android:textColor="@color/app_text"
             android:textSize="12sp"
             android:textStyle="bold"
             android:clickable="true"
@@ -485,7 +483,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="▣&#10;My Trips"
-            android:textColor="#718096"
+            android:textColor="@color/app_secondary_text"
             android:textSize="11sp"
             android:clickable="true"
             android:focusable="true" />
@@ -497,7 +495,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="◇&#10;Offers"
-            android:textColor="#718096"
+            android:textColor="@color/app_secondary_text"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true" />
@@ -509,7 +507,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="⌖&#10;Explore"
-            android:textColor="#718096"
+            android:textColor="@color/app_secondary_text"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true" />
@@ -521,7 +519,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="●&#10;Profile"
-            android:textColor="#718096"
+            android:textColor="@color/app_secondary_text"
             android:textSize="12sp"
             android:clickable="true"
             android:focusable="true" />

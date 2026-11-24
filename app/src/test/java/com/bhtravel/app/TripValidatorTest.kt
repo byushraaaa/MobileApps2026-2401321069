@@ -134,4 +134,98 @@ class TripValidatorTest {
             result
         )
     }
+
+    @Test
+    fun whitespaceDestination_returnsDestinationError() {
+        val result = TripValidator.validate(
+            "   ",
+            "Bulgaria",
+            validStartDate,
+            validEndDate,
+            "2"
+        )
+
+        assertEquals(
+            TripValidationError.DESTINATION_REQUIRED,
+            result
+        )
+    }
+
+    @Test
+    fun whitespaceCountry_returnsCountryError() {
+        val result = TripValidator.validate(
+            "Sofia",
+            "   ",
+            validStartDate,
+            validEndDate,
+            "2"
+        )
+
+        assertEquals(
+            TripValidationError.COUNTRY_REQUIRED,
+            result
+        )
+    }
+
+    @Test
+    fun negativeTravelers_returnsTravelersError() {
+        val result = TripValidator.validate(
+            "Sofia",
+            "Bulgaria",
+            validStartDate,
+            validEndDate,
+            "-1"
+        )
+
+        assertEquals(
+            TripValidationError.INVALID_TRAVELERS,
+            result
+        )
+    }
+
+    @Test
+    fun decimalTravelers_returnsTravelersError() {
+        val result = TripValidator.validate(
+            "Sofia",
+            "Bulgaria",
+            validStartDate,
+            validEndDate,
+            "2.5"
+        )
+
+        assertEquals(
+            TripValidationError.INVALID_TRAVELERS,
+            result
+        )
+    }
+
+    @Test
+    fun sameStartAndEndDate_returnsNoError() {
+        val result = TripValidator.validate(
+            "Sofia",
+            "Bulgaria",
+            1000L,
+            1000L,
+            "2"
+        )
+
+        assertNull(result)
+    }
+
+    @Test
+    fun emptyTravelers_returnsTravelersError() {
+        val result = TripValidator.validate(
+            "Sofia",
+            "Bulgaria",
+            validStartDate,
+            validEndDate,
+            ""
+        )
+
+        assertEquals(
+            TripValidationError.INVALID_TRAVELERS,
+            result
+        )
+    }
+
 }

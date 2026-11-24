@@ -2,6 +2,7 @@
 package com.bhtravel.app
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
@@ -36,9 +37,27 @@ class TripsActivity : AppCompatActivity() {
     private val dateFormat =
         SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
 
-    private val navy = android.graphics.Color.rgb(20, 43, 73)
-    private val lightBlue = android.graphics.Color.rgb(220, 232, 245)
-    private val white = android.graphics.Color.WHITE
+    // Colors automatically adapt to Light and Dark Mode
+    private val appBackground: Int
+        get() = getColor(R.color.app_background)
+
+    private val appCard: Int
+        get() = getColor(R.color.app_card)
+
+    private val appText: Int
+        get() = getColor(R.color.app_text)
+
+    private val appSecondaryText: Int
+        get() = getColor(R.color.app_secondary_text)
+
+    private val appDivider: Int
+        get() = getColor(R.color.app_divider)
+
+    private val appSelected: Int
+        get() = getColor(R.color.app_selected)
+
+    private val appUnselected: Int
+        get() = getColor(R.color.app_unselected)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,7 +151,8 @@ class TripsActivity : AppCompatActivity() {
         )
 
         demoTrips.forEach { trip ->
-            if (trip.destination.lowercase(Locale.ROOT)
+            if (
+                trip.destination.lowercase(Locale.ROOT)
                 !in existingDestinations
             ) {
                 repository.insertTrip(trip)
@@ -185,11 +205,12 @@ class TripsActivity : AppCompatActivity() {
         }
     }
 
+    // Section titles now use the active theme text color
     private fun addSectionTitle(title: String) {
         val textView = TextView(this).apply {
             text = title
             textSize = 21f
-            setTextColor(navy)
+            setTextColor(appText)
             setPadding(dp(4), dp(22), dp(4), dp(10))
             typeface = android.graphics.Typeface.DEFAULT_BOLD
         }
@@ -203,8 +224,8 @@ class TripsActivity : AppCompatActivity() {
             radius = dp(22).toFloat()
             cardElevation = dp(4).toFloat()
             strokeWidth = dp(1)
-            strokeColor = lightBlue
-            setCardBackgroundColor(white)
+            strokeColor = appDivider
+            setCardBackgroundColor(appCard)
             useCompatPadding = true
 
             layoutParams = LinearLayout.LayoutParams(
@@ -251,7 +272,7 @@ class TripsActivity : AppCompatActivity() {
             text = "${trip.destination}, ${trip.country}"
             textSize = 20f
             typeface = android.graphics.Typeface.DEFAULT_BOLD
-            setTextColor(navy)
+            setTextColor(appText)
             setPadding(0, dp(13), 0, dp(6))
         }
 
@@ -287,7 +308,8 @@ class TripsActivity : AppCompatActivity() {
                 topMargin = dp(12)
                 bottomMargin = dp(12)
             }
-            setBackgroundColor(lightBlue)
+
+            setBackgroundColor(appDivider)
         }
 
         mainLayout.addView(divider)
@@ -300,24 +322,24 @@ class TripsActivity : AppCompatActivity() {
 
         val editButton = createActionButton(
             "✎  Edit",
-            android.graphics.Color.rgb(215, 232, 245),
-            navy
+            appSelected,
+            appText
         ) {
             openEditTrip(trip)
         }
 
         val deleteButton = createActionButton(
             "▤  Delete",
-            android.graphics.Color.rgb(252, 226, 226),
-            android.graphics.Color.rgb(170, 45, 45)
+            appUnselected,
+            appText
         ) {
             showDeleteConfirmation(trip)
         }
 
         val mapsButton = createActionButton(
             "⌖  Maps",
-            android.graphics.Color.rgb(220, 235, 252),
-            navy
+            appSelected,
+            appText
         ) {
             openInMaps(trip)
         }
@@ -390,9 +412,11 @@ class TripsActivity : AppCompatActivity() {
             textSize = 12f
             isAllCaps = false
             setTextColor(textColor)
+
             setBackgroundTintList(
-                android.content.res.ColorStateList.valueOf(backgroundColor)
+                ColorStateList.valueOf(backgroundColor)
             )
+
             minWidth = 0
             minimumWidth = 0
             setPadding(dp(2), 0, dp(2), 0)
@@ -407,7 +431,7 @@ class TripsActivity : AppCompatActivity() {
         return TextView(this).apply {
             text = value
             textSize = 14f
-            setTextColor(navy)
+            setTextColor(appSecondaryText)
             setPadding(0, dp(5), 0, dp(5))
         }
     }

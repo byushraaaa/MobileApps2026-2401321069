@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F9FC"
+    android:background="@color/app_background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -11,11 +11,11 @@
         android:orientation="vertical"
         android:paddingBottom="28dp">
 
-        <!-- Navy Blue Header -->
+        <!-- Header -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="205dp"
-            android:background="#DCE8F5"
+            android:background="@color/app_input_background"
             android:paddingStart="24dp"
             android:paddingEnd="24dp">
 
@@ -27,7 +27,7 @@
                 android:layout_marginTop="20dp"
                 android:padding="6dp"
                 android:text="←"
-                android:textColor="#142B49"
+                android:textColor="@color/app_text"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
                 android:layout_below="@id/btnBack"
                 android:layout_marginTop="10dp"
                 android:text="My Trips"
-                android:textColor="#142B49"
+                android:textColor="@color/app_text"
                 android:textSize="34sp"
                 android:textStyle="bold" />
 
@@ -47,7 +47,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_marginBottom="25dp"
                 android:text="All your adventures in one place."
-                android:textColor="#42678F"
+                android:textColor="@color/app_secondary_text"
                 android:textSize="15sp" />
 
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="55dp"
                 android:text="☁"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/app_card"
                 android:textSize="38sp" />
 
             <TextView
@@ -67,7 +67,7 @@
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="55dp"
                 android:text="✈"
-                android:textColor="#142B49"
+                android:textColor="@color/app_text"
                 android:textSize="48sp" />
 
         </RelativeLayout>
@@ -85,7 +85,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="26dp"
                 android:text="Your journeys"
-                android:textColor="#142B49"
+                android:textColor="@color/app_text"
                 android:textSize="21sp"
                 android:textStyle="bold" />
 
@@ -94,11 +94,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:background="#EDF3FA"
+                android:background="@color/app_input_background"
                 android:gravity="center"
                 android:padding="28dp"
-                android:text="✈\n\nNo trips yet\n\nStart planning your next adventure!"
-                android:textColor="#42678F"
+                android:text="✈&#10;&#10;No trips yet&#10;&#10;Start planning your next adventure!"
+                android:textColor="@color/app_secondary_text"
                 android:textSize="17sp"
                 android:lineSpacingExtra="6dp"
                 android:visibility="gone" />

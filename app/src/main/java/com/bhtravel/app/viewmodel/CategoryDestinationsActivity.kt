@@ -2,7 +2,7 @@
 package com.bhtravel.app
 
 import android.content.Intent
-import android.graphics.Color
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.ViewGroup
@@ -69,8 +69,15 @@ class CategoryDestinationsActivity : AppCompatActivity() {
         val category = intent.getStringExtra(EXTRA_CATEGORY) ?: "Beach"
         val places = destinations[category] ?: emptyList()
 
+        // Colors automatically change with Light and Dark Mode
+        val surfaceColor = getColor(R.color.app_background)
+        val textColor = getColor(R.color.app_text)
+        val secondaryTextColor = getColor(R.color.app_secondary_text)
+        val accentColor = getColor(R.color.app_accent)
+
         val scrollView = ScrollView(this).apply {
-            setBackgroundColor(Color.WHITE)
+            setBackgroundColor(surfaceColor)
+            isFillViewport = true
         }
 
         val mainLayout = LinearLayout(this).apply {
@@ -78,31 +85,37 @@ class CategoryDestinationsActivity : AppCompatActivity() {
             setPadding(dp(18), dp(18), dp(18), dp(24))
         }
 
+        // BACK BUTTON
         val back = TextView(this).apply {
             text = "‹  Back"
             textSize = 15f
-            setTextColor(Color.rgb(40, 150, 145))
+            setTextColor(accentColor)
             setPadding(0, dp(4), 0, dp(12))
-            setOnClickListener { finish() }
+            setOnClickListener {
+                finish()
+            }
         }
         mainLayout.addView(back)
 
+        // CATEGORY TITLE
         val title = TextView(this).apply {
             text = category
             textSize = 27f
-            setTextColor(Color.rgb(20, 43, 73))
+            setTextColor(textColor)
             setTypeface(null, android.graphics.Typeface.BOLD)
         }
         mainLayout.addView(title)
 
+        // SUBTITLE
         val subtitle = TextView(this).apply {
             text = "${places.size} destinations to discover"
             textSize = 13f
-            setTextColor(Color.GRAY)
+            setTextColor(secondaryTextColor)
             setPadding(0, dp(5), 0, dp(18))
         }
         mainLayout.addView(subtitle)
 
+        // DESTINATION CARDS
         places.forEach { destination ->
             mainLayout.addView(createDestinationCard(destination))
         }
@@ -111,11 +124,21 @@ class CategoryDestinationsActivity : AppCompatActivity() {
         setContentView(scrollView)
     }
 
-    private fun createDestinationCard(destination: Destination): MaterialCardView {
+    private fun createDestinationCard(
+        destination: Destination
+    ): MaterialCardView {
+
+        val cardBackground = getColor(R.color.app_card)
+        val textColor = getColor(R.color.app_text)
+        val secondaryTextColor = getColor(R.color.app_secondary_text)
+        val primaryColor = getColor(R.color.app_primary)
+        val onPrimaryColor = getColor(R.color.app_on_primary)
+
         val card = MaterialCardView(this).apply {
             radius = dp(18).toFloat()
             cardElevation = dp(2).toFloat()
-            setCardBackgroundColor(Color.rgb(244, 240, 247))
+            setCardBackgroundColor(cardBackground)
+
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
@@ -129,11 +152,13 @@ class CategoryDestinationsActivity : AppCompatActivity() {
             setPadding(dp(13), dp(13), dp(13), dp(13))
         }
 
+        // DESTINATION IMAGE
         val imageView = ImageView(this).apply {
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 dp(175)
             )
+
             scaleType = ImageView.ScaleType.CENTER_CROP
 
             val imageId = resources.getIdentifier(
@@ -145,51 +170,66 @@ class CategoryDestinationsActivity : AppCompatActivity() {
             setImageResource(
                 if (imageId != 0) imageId else R.drawable.travel
             )
+
             contentDescription = destination.name
         }
+
         content.addView(imageView)
 
+        // DESTINATION NAME
         val name = TextView(this).apply {
             text = destination.name
             textSize = 20f
-            setTextColor(Color.rgb(20, 43, 73))
+            setTextColor(textColor)
             setTypeface(null, android.graphics.Typeface.BOLD)
             setPadding(0, dp(12), 0, dp(3))
         }
+
         content.addView(name)
 
+        // COUNTRY
         val country = TextView(this).apply {
             text = destination.country
             textSize = 13f
-            setTextColor(Color.rgb(40, 150, 145))
+            setTextColor(secondaryTextColor)
         }
+
         content.addView(country)
 
+        // DESCRIPTION
         val description = TextView(this).apply {
             text = destination.description
             textSize = 13f
-            setTextColor(Color.DKGRAY)
+            setTextColor(secondaryTextColor)
             setPadding(0, dp(8), 0, dp(8))
         }
+
         content.addView(description)
 
+        // GOOGLE MAPS BUTTON
         val mapButton = MaterialButton(this).apply {
             text = "Explore on Map"
             isAllCaps = false
             cornerRadius = dp(12)
-            setBackgroundColor(Color.rgb(47, 183, 176))
-            setTextColor(Color.WHITE)
+
+            backgroundTintList = ColorStateList.valueOf(primaryColor)
+            setTextColor(onPrimaryColor)
 
             setOnClickListener {
-                val url = "https://www.google.com/maps/search/?api=1&query=" +
-                        Uri.encode(destination.mapQuery)
+                val url =
+                    "https://www.google.com/maps/search/?api=1&query=" +
+                            Uri.encode(destination.mapQuery)
 
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+                startActivity(
+                    Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                )
             }
         }
+
         content.addView(mapButton)
 
         card.addView(content)
+
         return card
     }
 

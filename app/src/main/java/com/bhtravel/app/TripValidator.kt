@@ -47,5 +47,7 @@ object TripValidator {
         }
 
         return null
+
     }
+
 }

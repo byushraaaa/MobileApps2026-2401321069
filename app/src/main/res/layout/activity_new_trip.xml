@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F8F7"
+    android:background="@color/app_background"
     android:fillViewport="true">
 
     <LinearLayout
@@ -11,20 +11,22 @@
         android:orientation="vertical"
         android:padding="24dp">
 
+        <!-- BRAND -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="BHtravel"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="26sp"
             android:textStyle="bold" />
 
+        <!-- TITLE -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="Create a new trip"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="27sp"
             android:textStyle="bold" />
 
@@ -33,15 +35,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="7dp"
             android:text="Let's plan your next adventure!"
-            android:textColor="#526D78"
+            android:textColor="@color/app_secondary_text"
             android:textSize="15sp" />
 
+        <!-- DESTINATION -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
             android:text="Destination *"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -51,19 +54,21 @@
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_trip_card"
+            android:backgroundTint="@color/app_input_background"
             android:hint="e.g. Rome"
             android:inputType="textCapWords"
             android:padding="15dp"
-            android:textColor="#142B49"
-            android:textColorHint="#82939A"
+            android:textColor="@color/app_text"
+            android:textColorHint="@color/app_secondary_text"
             android:textSize="15sp" />
 
+        <!-- COUNTRY -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="Country *"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -73,19 +78,21 @@
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_trip_card"
+            android:backgroundTint="@color/app_input_background"
             android:hint="e.g. Italy"
             android:inputType="textCapWords"
             android:padding="15dp"
-            android:textColor="#142B49"
-            android:textColorHint="#82939A"
+            android:textColor="@color/app_text"
+            android:textColorHint="@color/app_secondary_text"
             android:textSize="15sp" />
 
+        <!-- START DATE -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="Start date *"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -94,18 +101,19 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#D9EFEC"
+            android:backgroundTint="@color/app_selected"
             android:text="Choose start date"
             android:textAllCaps="false"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="15sp" />
 
+        <!-- END DATE -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="End date *"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -114,18 +122,19 @@
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
-            android:backgroundTint="#E5EDF5"
+            android:backgroundTint="@color/app_selected"
             android:text="Choose end date"
             android:textAllCaps="false"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="15sp" />
 
+        <!-- TRAVELERS -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="Number of travelers"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -135,20 +144,22 @@
             android:layout_height="55dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_trip_card"
+            android:backgroundTint="@color/app_input_background"
             android:hint="1"
             android:inputType="number"
             android:padding="15dp"
             android:text="1"
-            android:textColor="#142B49"
-            android:textColorHint="#82939A"
+            android:textColor="@color/app_text"
+            android:textColorHint="@color/app_secondary_text"
             android:textSize="15sp" />
 
+        <!-- NOTES -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="Notes"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="14sp"
             android:textStyle="bold" />
 
@@ -158,36 +169,39 @@
             android:layout_height="110dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bg_trip_card"
+            android:backgroundTint="@color/app_input_background"
             android:gravity="top"
             android:hint="Add some details about your trip..."
             android:inputType="textCapSentences|textMultiLine"
             android:padding="15dp"
-            android:textColor="#142B49"
-            android:textColorHint="#82939A"
+            android:textColor="@color/app_text"
+            android:textColorHint="@color/app_secondary_text"
             android:textSize="15sp" />
 
+        <!-- SAVE TRIP -->
         <Button
             android:id="@+id/btnSaveTrip"
             android:layout_width="match_parent"
             android:layout_height="58dp"
             android:layout_marginTop="28dp"
-            android:backgroundTint="#168B8B"
+            android:backgroundTint="@color/app_primary"
             android:text="Create Trip"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/app_on_primary"
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <!-- CANCEL -->
         <Button
             android:id="@+id/btnCancelTrip"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="20dp"
-            android:backgroundTint="#E5EDF5"
+            android:backgroundTint="@color/app_selected"
             android:text="Cancel"
             android:textAllCaps="false"
-            android:textColor="#142B49"
+            android:textColor="@color/app_text"
             android:textSize="15sp" />
 
     </LinearLayout>

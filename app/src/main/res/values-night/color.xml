@@ -1,0 +1,40 @@
+
+<resources>
+    <!-- Brand colors -->
+    <color name="navy">#142B49</color>
+    <color name="turquoise">#8FAED0</color>
+    <color name="aqua">#303B49</color>
+    <color name="light_blue">#303B49</color>
+    <color name="cream">#202833</color>
+
+    <!-- Light theme reference colors -->
+    <color name="light_background">#E8EBF0</color>
+    <color name="light_surface">#FFFFFF</color>
+    <color name="light_text">#142B49</color>
+    <color name="light_secondary_text">#718096</color>
+    <color name="light_primary">#142B49</color>
+    <color name="light_accent">#42678F</color>
+
+    <!-- Dark theme -->
+    <color name="dark_background">#202833</color>
+    <color name="dark_surface">#303B49</color>
+    <color name="dark_text">#F5F7FA</color>
+    <color name="dark_secondary_text">#B0BEC5</color>
+    <color name="dark_primary">#DCE8F5</color>
+    <color name="dark_accent">#8FAED0</color>
+
+    <!-- Semantic UI colors: Dark Mode -->
+    <color name="app_background">#202833</color>
+    <color name="app_surface">#303B49</color>
+    <color name="app_card">#303B49</color>
+    <color name="app_text">#F5F7FA</color>
+    <color name="app_secondary_text">#B0BEC5</color>
+    <color name="app_primary">#DCE8F5</color>
+    <color name="app_on_primary">#142B49</color>
+    <color name="app_accent">#8FAED0</color>
+    <color name="app_input_background">#243850</color>
+    <color name="app_divider">#354A62</color>
+    <color name="app_icon">#B0BEC5</color>
+    <color name="app_selected">#354A62</color>
+    <color name="app_unselected">#243850</color>
+</resources>
