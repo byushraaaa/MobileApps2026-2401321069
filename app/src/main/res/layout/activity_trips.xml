@@ -89,6 +89,13 @@
                 android:textSize="21sp"
                 android:textStyle="bold" />
 
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnOpenItinerary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="@string/open_itinerary" />
+
             <TextView
                 android:id="@+id/tvEmptyState"
                 android:layout_width="match_parent"

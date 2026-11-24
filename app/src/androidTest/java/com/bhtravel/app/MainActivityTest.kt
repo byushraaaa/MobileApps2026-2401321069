@@ -34,4 +34,14 @@ class MainActivityTest {
         onView(withId(R.id.etDestination))
             .check(matches(isDisplayed()))
     }
+
+    @Test
+    fun myTripsButton_opensItineraryScreen() {
+        onView(withId(R.id.navTrips)).perform(click())
+        onView(withId(R.id.btnOpenItinerary))
+            .perform(scrollTo(), click())
+
+        onView(withId(R.id.spinnerItineraryTrips))
+            .check(matches(isDisplayed()))
+    }
 }

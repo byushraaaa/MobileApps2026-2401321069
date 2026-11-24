@@ -160,6 +160,33 @@ class TripDatabaseTest {
         }
 
     @Test
+    fun tripDao_deleteTrip_alsoRemovesExpensesAndItineraryItems() =
+        runBlocking {
+            val trip = createTrip()
+            database.tripDao().insertTrip(trip)
+            database.expenseDao().insertExpense(createExpense())
+            database.itineraryDao().insertItem(createItineraryItem())
+
+            database.tripDao().deleteTrip(trip)
+
+            assertTrue(
+                database
+                    .expenseDao()
+                    .getExpensesForTrip(trip.id)
+                    .first()
+                    .isEmpty(),
+            )
+            assertTrue(
+                database
+                    .itineraryDao()
+                    .getItemsForTrip(trip.id)
+                    .first()
+                    .isEmpty(),
+            )
+            assertNull(database.tripDao().getTripById(trip.id))
+        }
+
+    @Test
     fun tripDao_getAllTrips_returnsAllTrips() =
         runBlocking {
             database.tripDao().insertTrip(createTrip(1, "Paris"))

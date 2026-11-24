@@ -40,7 +40,17 @@ class TripRepositoryTest {
         }
 
         override suspend fun deleteTrip(trip: TripEntity) {
+            deleteExpensesForTrip(trip.id)
+            deleteItineraryItemsForTrip(trip.id)
             trips.value = trips.value.filterNot { it.id == trip.id }
+        }
+
+        override suspend fun deleteExpensesForTrip(tripId: Int) = Unit
+
+        override suspend fun deleteItineraryItemsForTrip(tripId: Int) = Unit
+
+        override suspend fun deleteTripById(tripId: Int) {
+            trips.value = trips.value.filterNot { it.id == tripId }
         }
     }
 

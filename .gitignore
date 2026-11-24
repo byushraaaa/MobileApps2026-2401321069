@@ -1,0 +1,15 @@
+# Gradle and Android build output
+.gradle/
+**/build/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# Android Studio and machine-local configuration
+.idea/
+*.iml
+local.properties
+
+# macOS and Android signing/build sidecars
+.DS_Store
+*.apk.idsig

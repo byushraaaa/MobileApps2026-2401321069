@@ -69,6 +69,10 @@ class TripsActivity : AppCompatActivity() {
             finish()
         }
 
+        findViewById<View>(R.id.btnOpenItinerary).setOnClickListener {
+            startActivity(Intent(this, ItineraryActivity::class.java))
+        }
+
         val database = DatabaseProvider.getDatabase(this)
         repository = TripRepository(database.tripDao())
 
